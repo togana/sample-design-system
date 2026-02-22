@@ -10,8 +10,8 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 
 対象コンポーネントの以下のファイルをすべて読む:
 
-- `{Name}.tsx` — メインコンポーネント
-- `{Name}.recipe.ts` — Panda CSS レシピ
+- `{name}.tsx` — メインコンポーネント
+- `{name}.recipe.ts` — Panda CSS レシピ
 - `index.ts` — re-export
 
 ## チェック項目
@@ -29,7 +29,7 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 
 | # | チェック内容 | 深刻度 |
 |---|------------|--------|
-| A1 | Ark UI のヘッドレスコンポーネントをベースにしているか | critical |
+| A1 | Ark UI のヘッドレスコンポーネントをベースにしているか（Ark UI に対応コンポーネントがない場合はネイティブ HTML 要素で可） | critical |
 | A2 | Ark UI の Props 型がそのまま公開されているか（独自の Props 型で包んでいないか） | warning |
 | A3 | `asChild` による polymorphic レンダリングが維持されているか | warning |
 | A4 | Ark UI の a11y 機能（ARIA 属性、キーボード操作、フォーカス管理）が上書きされていないか | critical |
@@ -39,7 +39,7 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 | # | チェック内容 | 深刻度 |
 |---|------------|--------|
 | P1 | `cva()` でバリアントが定義されているか | critical |
-| P2 | レシピが `{Name}.recipe.ts` に分離されているか | warning |
+| P2 | レシピが `{name}.recipe.ts` に分離されているか | warning |
 | P3 | インラインスタイル (`css({})`) がレシピで対応可能な箇所に使われていないか | warning |
 | P4 | `style` prop による直接スタイル指定がないか | critical |
 | P5 | レシピ内で `token()` またはセマンティックトークン参照を使っているか | warning |
@@ -59,9 +59,10 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 
 | # | チェック内容 | 深刻度 |
 |---|------------|--------|
-| F1 | `src/components/{Name}/` 配下に配置されているか | warning |
+| F1 | `src/components/{name}/` 配下に配置されているか（ケバブケース） | warning |
 | F2 | `index.ts` で re-export されているか | warning |
 | F3 | `'use client'` ディレクティブが必要なコンポーネントに付与されているか | critical |
+| F4 | `.pen` デザインファイルが配置されているか | info |
 
 ## 出力形式
 
@@ -72,16 +73,16 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 
 ### Critical（修正必須）
 
-- **[T1]** `Button.recipe.ts:12` — ハードコード値 `#3b82f6` を使用。`bg.fill.brand` に置き換える
-- **[X4]** `Button.recipe.ts:8` — `outline: "none"` でフォーカスリングを非表示にしている
+- **[T1]** `button.recipe.ts:12` — ハードコード値 `#3b82f6` を使用。`bg.fill.brand` に置き換える
+- **[X4]** `button.recipe.ts:8` — `outline: "none"` でフォーカスリングを非表示にしている
 
 ### Warning（推奨）
 
-- **[P3]** `Button.tsx:15` — インラインの `css({})` をレシピのバリアントに移動すべき
+- **[P3]** `button.tsx:15` — インラインの `css({})` をレシピのバリアントに移動すべき
 
 ### Info（参考）
 
-- **[X6]** `Button.tsx:22` — `disabled` を `aria-disabled` に変更を検討
+- **[X6]** `button.tsx:22` — `disabled` を `aria-disabled` に変更を検討
 
 ### 合格項目
 

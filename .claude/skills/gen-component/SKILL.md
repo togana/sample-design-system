@@ -10,6 +10,7 @@ $ARGUMENTS の内容に基づいてコンポーネントを生成してくださ
 
 - ヘッドレス UI: Ark UI (`@ark-ui/react`)
 - スタイリング: Panda CSS (`styled-system` から import)
+- デザイン: Pencil (`.pen` ファイル)
 - フレームワーク: React (Server Components 非対応のものは `'use client'` を付ける)
 
 ## ファイル構成
@@ -17,16 +18,25 @@ $ARGUMENTS の内容に基づいてコンポーネントを生成してくださ
 各コンポーネントは以下のディレクトリ構成で作成する:
 
 ```
-src/components/{Name}/
+src/components/{name}/
 ├── index.ts              # re-export
-├── {Name}.tsx            # メインコンポーネント
-├── {Name}.recipe.ts      # Panda CSS レシピ (cva)
-├── {Name}.test.tsx       # テスト
-└── {Name}.stories.tsx    # Storybook（対応した場合）
+├── {name}.tsx            # メインコンポーネント
+├── {name}.recipe.ts      # Panda CSS レシピ (cva)
+├── {name}.pen            # Pencil デザインファイル
+├── {name}.test.tsx       # テスト
+└── {name}.stories.tsx    # Storybook（対応した場合）
 ```
 
-- `{Name}` は PascalCase（例: `Button`, `TextField`）
+- `{name}` はケバブケース（例: `button`, `text-field`）
 - `index.ts` はコンポーネントと型を re-export する
+- `.pen` ファイルはコンポーネント設計に使用し、Git にコミットする
+
+## Pencil デザインファイル
+
+- コンポーネントの `.pen` ファイルを `src/components/{name}/` 配下に配置する
+- `.pen` ファイルの内容は Pencil MCP ツールでのみ読み書きする（`Read` / `Grep` ツールは使用不可）
+- `.pen` ファイルにはコンポーネントの全バリアント・状態を設計として含める
+- デザインとコードを同一の PR でレビューできるようにする
 
 ## トークンルール
 
@@ -49,6 +59,7 @@ src/components/{Name}/
 ## Ark UI 統合ルール
 
 - Ark UI のヘッドレスコンポーネントをベースにする
+- Ark UI に対応するコンポーネントが存在しない場合は、ネイティブ HTML 要素をベースに a11y を自前で担保する
 - Ark UI の Props 型をそのまま公開し、独自の Props 型で包まない
 - `asChild` による polymorphic レンダリングを維持する
 - Ark UI が提供する a11y（ARIA 属性、キーボード操作、フォーカス管理）をそのまま活用する
@@ -59,13 +70,13 @@ src/components/{Name}/
 ### レシピ定義
 
 - `cva()` (Class Variance Authority パターン) でバリアントを定義する
-- レシピは `{Name}.recipe.ts` に分離する
-- `{Name}.tsx` からレシピを import して適用する
+- レシピは `{name}.recipe.ts` に分離する
+- `{name}.tsx` からレシピを import して適用する
 
 ### レシピの構成
 
 ```ts
-import { cva } from "../../styled-system/css";
+import { cva } from "../../../styled-system/css";
 
 export const buttonRecipe = cva({
   base: {
@@ -96,27 +107,45 @@ export const buttonRecipe = cva({
 
 ## コンポーネント実装パターン
 
+### Ark UI にコンポーネントがある場合
+
 ```tsx
 "use client";
 
-import { Button as ArkButton } from "@ark-ui/react";
-import type { ButtonProps as ArkButtonProps } from "@ark-ui/react";
-import { buttonRecipe } from "./Button.recipe";
+import { Dialog } from "@ark-ui/react";
+import type { DialogRootProps } from "@ark-ui/react";
+import { dialogRecipe } from "./dialog.recipe";
 
-export interface ButtonProps extends ArkButtonProps {
-  variant?: "solid" | "outline" | "ghost";
-  size?: "sm" | "md" | "lg";
-}
+// Ark UI の Props 型をそのまま公開する
+```
 
-export const Button = (props: ButtonProps) => {
-  const { variant, size, className, ...rest } = props;
+### Ark UI にコンポーネントがない場合
+
+```tsx
+"use client";
+
+import type { ComponentPropsWithRef, ReactNode } from "react";
+import { cx } from "../../../styled-system/css";
+import type { RecipeVariantProps } from "../../../styled-system/css";
+import { buttonRecipe } from "./button.recipe";
+
+type ButtonVariantProps = RecipeVariantProps<typeof buttonRecipe>;
+
+export type ButtonProps = ComponentPropsWithRef<"button"> &
+  ButtonVariantProps & {
+    // コンポーネント固有の props
+  };
+
+export function Button(props: ButtonProps) {
+  const { ref, variant, size, className, ...rest } = props;
   return (
-    <ArkButton
-      className={buttonRecipe({ variant, size })}
+    <button
+      ref={ref}
+      className={cx(buttonRecipe({ variant, size }), className)}
       {...rest}
     />
   );
-};
+}
 ```
 
 ## アクセシビリティ要件
@@ -127,6 +156,7 @@ export const Button = (props: ButtonProps) => {
 - `focus-visible` でフォーカスリングを表示する
 - カラーコントラストは WCAG AA 以上（通常テキスト 4.5:1、大テキスト 3:1）
 - icon-only の要素には `aria-label` を必須にする
+- disabled 状態は `aria-disabled` の使用を推奨する（HTML `disabled` 属性ではなく）
 
 ## 作業手順
 
@@ -142,19 +172,20 @@ export const Button = (props: ButtonProps) => {
 
 ### 3. レシピの作成
 
-- `src/components/{Name}/{Name}.recipe.ts` を作成する
+- `src/components/{name}/{name}.recipe.ts` を作成する
 - `cva()` でバリアント定義を実装する
 - セマンティックトークンを参照する
 
 ### 4. コンポーネントの実装
 
-- `src/components/{Name}/{Name}.tsx` を作成する
+- `src/components/{name}/{name}.tsx` を作成する
 - Ark UI のコンポーネントをベースに、レシピを適用する
+- Ark UI に対応コンポーネントがない場合はネイティブ HTML 要素を使用する
 - `'use client'` ディレクティブを付ける（必要な場合）
 
 ### 5. エクスポート
 
-- `src/components/{Name}/index.ts` で re-export する
+- `src/components/{name}/index.ts` で re-export する
 
 ### 6. 検証
 
