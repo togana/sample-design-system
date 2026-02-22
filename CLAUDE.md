@@ -15,3 +15,4 @@
 
 - コミットメッセージは日本語で書く
 - `Co-Authored-By` は付けない
+- Conventional Commits のプレフィックスを付ける（例: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`, `ci:`）
