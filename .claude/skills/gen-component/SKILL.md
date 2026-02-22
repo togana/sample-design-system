@@ -157,7 +157,7 @@ export const buttonRecipe = cva({
 });
 ```
 
-> **注意**: `_hover` / `_active` 条件は `aria-disabled` / `data-disabled` の状態を考慮しない。disabled 時に hover/active で色が変化しないよう、`&:is(:hover, [data-hover]):not([data-disabled])` のようにカスタムセレクタで `:not([data-disabled])` ガードを付ける。
+> **注意**: `data-disabled` を使うコンポーネント（Button 等）では、`_hover` / `_active` が disabled 時にも適用されてしまう。この場合は `&:is(:hover, [data-hover]):not([data-disabled])` のようにカスタムセレクタで `:not([data-disabled])` ガードを付ける。disabled 状態を持たないコンポーネントでは `_hover` / `_active` をそのまま使ってよい。
 
 ### styled ファクトリの使用（ADR-006）
 
