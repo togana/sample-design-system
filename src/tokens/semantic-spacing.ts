@@ -6,6 +6,7 @@ export const semanticSpacing: SemanticTokens["spacing"] = {
     sm: { value: "{spacing.2}" },
     md: { value: "{spacing.3}" },
     lg: { value: "{spacing.4}" },
+    xl: { value: "{spacing.6}" },
   },
   section: {
     sm: { value: "{spacing.6}" },

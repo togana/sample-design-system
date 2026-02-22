@@ -7,7 +7,12 @@ export const semanticColors: SemanticTokens["colors"] = {
       value: { base: "white", _dark: "{colors.gray.950}" },
     },
     subtle: {
-      value: { base: "{colors.gray.50}", _dark: "{colors.gray.900}" },
+      DEFAULT: {
+        value: { base: "{colors.gray.50}", _dark: "{colors.gray.900}" },
+      },
+      hover: {
+        value: { base: "{colors.gray.100}", _dark: "{colors.gray.800}" },
+      },
     },
     surface: {
       DEFAULT: {
@@ -38,6 +43,9 @@ export const semanticColors: SemanticTokens["colors"] = {
         DEFAULT: {
           value: { base: "{colors.green.600}", _dark: "{colors.green.500}" },
         },
+      },
+      disabled: {
+        value: { base: "{colors.gray.200}", _dark: "{colors.gray.800}" },
       },
     },
   },

@@ -25,6 +25,11 @@ export default defineConfig({
   },
 
   theme: {
+    keyframes: {
+      spin: {
+        to: { transform: "rotate(360deg)" },
+      },
+    },
     extend: {
       tokens: {
         colors,
