@@ -62,5 +62,7 @@ export default defineConfig({
     },
   },
 
+  jsxFramework: "react",
+
   outdir: "styled-system",
 });
