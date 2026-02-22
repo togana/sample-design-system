@@ -17,7 +17,7 @@ export default defineConfig({
 
   preflight: true,
 
-  include: ["./src/**/*.{ts,tsx}"],
+  include: ["./src/**/*.{ts,tsx}", "./.storybook/**/*.{ts,tsx}"],
 
   exclude: [],
 
