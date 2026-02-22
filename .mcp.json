@@ -10,6 +10,13 @@
     "storybook-mcp": {
       "type": "http",
       "url": "http://localhost:6006/mcp"
+    },
+    "panda": {
+      "command": "npx",
+      "args": [
+        "panda",
+        "mcp"
+      ]
     }
   }
 }
