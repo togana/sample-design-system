@@ -34,15 +34,18 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 | A3 | `asChild` による polymorphic レンダリングが維持されているか | warning |
 | A4 | Ark UI の a11y 機能（ARIA 属性、キーボード操作、フォーカス管理）が上書きされていないか | critical |
 
-### 3. Panda CSS スタイリング
+### 3. Panda CSS スタイリング（ADR-006 準拠）
 
 | # | チェック内容 | 深刻度 |
 |---|------------|--------|
-| P1 | `cva()` でバリアントが定義されているか | critical |
+| P1 | `cva()` または `sva()` でバリアントが定義されているか | critical |
 | P2 | レシピが `{name}.recipe.ts` に分離されているか | warning |
-| P3 | インラインスタイル (`css({})`) がレシピで対応可能な箇所に使われていないか | warning |
+| P3 | `css()` 関数が使われていないか（`styled` ファクトリで代替すべき） | critical |
 | P4 | `style` prop による直接スタイル指定がないか | critical |
 | P5 | レシピ内で `token()` またはセマンティックトークン参照を使っているか | warning |
+| P6 | 単一パーツコンポーネントで `styled("element", recipe)` を使用しているか | critical |
+| P7 | 複合パーツコンポーネントで `sva` + `createStyleContext` を使用しているか | critical |
+| P8 | パターンコンポーネント（`Box`, `Flex`, `Stack` 等）が使われていないか | warning |
 
 ### 4. アクセシビリティ
 

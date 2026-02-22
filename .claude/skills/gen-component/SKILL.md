@@ -69,9 +69,10 @@ src/components/{name}/
 
 ### レシピ定義
 
-- `cva()` (Class Variance Authority パターン) でバリアントを定義する
+- 単一パーツコンポーネント: `cva()` でバリアントを定義する
+- 複合パーツコンポーネント: `sva()` でスロット + バリアントを定義する
 - レシピは `{name}.recipe.ts` に分離する
-- `{name}.tsx` からレシピを import して適用する
+- `{name}.tsx` からレシピを import し、`styled` ファクトリまたは `createStyleContext` で適用する
 
 ### レシピの構成
 
@@ -99,53 +100,83 @@ export const buttonRecipe = cva({
 });
 ```
 
+### styled ファクトリの使用（ADR-006）
+
+スタイルの適用は `styled` ファクトリに統一し、`css()` 関数は使わない。
+
+| パターン | 手法 |
+|----------|------|
+| 基本スタイリング | `styled.div`, `styled.button` 等の styled props |
+| バリアント付きコンポーネント（単一パーツ） | `cva` + `styled("button", recipe)` |
+| スロット付きコンポーネント（複合パーツ） | `sva` + `createStyleContext` |
+
 ### 禁止事項
 
-- インラインスタイル (`css({})`) はレシピで対応できない場合のみ使用する
-- `style` prop による直接スタイル指定は禁止
-- レシピ内で生の値（`"16px"`, `"#333"` 等）を使わない
+- `css()` 関数の使用（`styled` ファクトリで代替する）
+- パターンコンポーネント（`Box`, `Flex`, `Stack` 等）の使用（`styled` ファクトリで代替する）
+- `style` prop による直接スタイル指定
+- レシピ内で生の値（`"16px"`, `"#333"` 等）を使う
 
 ## コンポーネント実装パターン
 
-### Ark UI にコンポーネントがある場合
+### 単一パーツ: Ark UI にコンポーネントがある場合
+
+`styled(ark.element, recipe)` で Ark UI コンポーネントにスタイルを適用する。
 
 ```tsx
 "use client";
 
-import { Dialog } from "@ark-ui/react";
-import type { DialogRootProps } from "@ark-ui/react";
-import { dialogRecipe } from "./dialog.recipe";
+import { ark } from "@ark-ui/react/factory";
+import { styled } from "../../../styled-system/jsx";
+import { buttonRecipe } from "./button.recipe";
+
+const BaseButton = styled(ark.button, buttonRecipe);
 
 // Ark UI の Props 型をそのまま公開する
 ```
 
-### Ark UI にコンポーネントがない場合
+### 単一パーツ: Ark UI にコンポーネントがない場合
+
+`styled("element", recipe)` でネイティブ HTML 要素にレシピを適用する。
 
 ```tsx
 "use client";
 
-import type { ComponentPropsWithRef, ReactNode } from "react";
-import { cx } from "../../../styled-system/css";
-import type { RecipeVariantProps } from "../../../styled-system/css";
+import type { ComponentProps, ReactNode } from "react";
+import { styled } from "../../../styled-system/jsx";
 import { buttonRecipe } from "./button.recipe";
 
-type ButtonVariantProps = RecipeVariantProps<typeof buttonRecipe>;
+const StyledButton = styled("button", buttonRecipe);
 
-export type ButtonProps = ComponentPropsWithRef<"button"> &
-  ButtonVariantProps & {
-    // コンポーネント固有の props
-  };
+export type ButtonProps = ComponentProps<typeof StyledButton> & {
+  // コンポーネント固有の props
+};
 
 export function Button(props: ButtonProps) {
-  const { ref, variant, size, className, ...rest } = props;
+  const { ref, variant, size, ...rest } = props;
   return (
-    <button
-      ref={ref}
-      className={cx(buttonRecipe({ variant, size }), className)}
-      {...rest}
-    />
+    <StyledButton ref={ref} variant={variant} size={size} {...rest} />
   );
 }
+```
+
+### 複合パーツ（スロット付き）: sva + createStyleContext
+
+複数のパーツを持つコンポーネントは `sva` + `createStyleContext` で構成する。
+
+```tsx
+"use client";
+
+import { Accordion } from "@ark-ui/react/accordion";
+import { createStyleContext } from "../../../styled-system/jsx";
+import { accordionRecipe } from "./accordion.recipe";
+
+const { withProvider, withContext } = createStyleContext(accordionRecipe);
+
+export const Root = withProvider(Accordion.Root, "root");
+export const Item = withContext(Accordion.Item, "item");
+export const ItemTrigger = withContext(Accordion.ItemTrigger, "itemTrigger");
+export const ItemContent = withContext(Accordion.ItemContent, "itemContent");
 ```
 
 ## アクセシビリティ要件
