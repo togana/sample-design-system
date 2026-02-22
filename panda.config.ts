@@ -1,20 +1,57 @@
 import { defineConfig } from "@pandacss/dev";
+import {
+  colors,
+  spacing,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  shadows,
+  durations,
+  easings,
+  semanticColors,
+  semanticSpacing,
+} from "./src/tokens";
 
 export default defineConfig({
-  // Whether to use css reset
   preflight: true,
 
-  // Where to look for your css declarations
   include: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}"],
 
-  // Files to exclude
   exclude: [],
 
-  // Useful for theme customization
-  theme: {
-    extend: {},
+  conditions: {
+    light: "[data-color-mode=light] &",
+    dark: "[data-color-mode=dark] &",
   },
 
-  // The output directory for your css system
+  theme: {
+    extend: {
+      tokens: {
+        colors,
+        spacing,
+        fontSizes,
+        fontWeights,
+        lineHeights,
+        shadows,
+        durations,
+        easings,
+      },
+      semanticTokens: {
+        colors: semanticColors,
+        spacing: semanticSpacing,
+        fontSizes: {
+          body: { value: "{fontSizes.sm}" },
+          heading: { value: "{fontSizes.xl}" },
+          caption: { value: "{fontSizes.xs}" },
+        },
+        shadows: {
+          card: { value: "{shadows.sm}" },
+          dropdown: { value: "{shadows.md}" },
+          modal: { value: "{shadows.lg}" },
+        },
+      },
+    },
+  },
+
   outdir: "styled-system",
 });
