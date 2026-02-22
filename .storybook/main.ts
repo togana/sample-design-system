@@ -1,7 +1,10 @@
 import { defineMain } from "@storybook/nextjs-vite/node";
 
 export default defineMain({
-  framework: "@storybook/nextjs-vite",
+  framework: {
+    name: "@storybook/nextjs-vite",
+    options: {}
+  },
   stories: ["../src/**/*.stories.@(ts|tsx)"],
   addons: [
     "@storybook/addon-themes",
@@ -13,6 +16,7 @@ export default defineMain({
           dev: true,
           docs: true,
         },
+        experimentalFormat: "markdown",
       },
     },
   ],
