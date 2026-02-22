@@ -1,3 +1,4 @@
+// @ts-expect-error -- exports subpath; IDE の型解決で誤検知されるが tsc・ランタイムともに正常
 import { defineMain } from "@storybook/nextjs-vite/node";
 
 export default defineMain({
