@@ -38,6 +38,27 @@ src/components/{name}/
 - `.pen` ファイルにはコンポーネントの全バリアント・状態を設計として含める
 - デザインとコードを同一の PR でレビューできるようにする
 
+### .pen ファイルからのデザイン読み取り
+
+既存の `.pen` ファイルがある場合、要件確認フェーズで Pencil MCP ツール（`batch_get` に `patterns: [{ reusable: true }]`）を使って以下を抽出する:
+
+- 再利用可能なバリアントフレームとその視覚プロパティ（fill, stroke, cornerRadius）
+- サイズごとのオーバーライド（height, padding, gap, fontSize）
+- 状態の表現（disabled の opacity、loading の表現等）
+- テーマ変数（`get_variables` で取得）
+
+### .pen 変数名と Panda CSS トークンの対応
+
+`.pen` ファイルでは `$variable-name` 形式でデザイン変数を参照する。レシピ作成時は以下のルールで Panda CSS トークンに変換する:
+
+| .pen の形式 | Panda CSS の形式 | 例 |
+|---|---|---|
+| `$bg-fill-brand` | `bg.fill.brand` | セマンティックカラー: ハイフンをドットに変換 |
+| `$text-onFill` | `text.onFill` | キャメルケース部分はそのまま |
+| `$border-danger` | `border.danger` | セマンティックカラー: ハイフンをドットに変換 |
+| `$radius-md` | `md`（radii スケール） | プリミティブトークン: スケール名で参照 |
+| `$font-weight-medium` | `medium`（fontWeights スケール） | プリミティブトークン: スケール名で参照 |
+
 ## トークンルール
 
 ### カラー
@@ -97,6 +118,37 @@ export const buttonRecipe = cva({
     variant: "solid",
     size: "md",
   },
+});
+```
+
+### compoundVariants の使用
+
+`variant` と `colorScheme` など、複数のバリアント軸の組み合わせでスタイルが決まる場合は `compoundVariants` を使う:
+
+```ts
+export const buttonRecipe = cva({
+  variants: {
+    variant: {
+      solid: {},
+      outline: { borderWidth: "1px", borderStyle: "solid", backgroundColor: "transparent" },
+    },
+    colorScheme: {
+      brand: {},
+      danger: {},
+    },
+  },
+  compoundVariants: [
+    {
+      variant: "solid",
+      colorScheme: "brand",
+      css: {
+        backgroundColor: "bg.fill.brand",
+        color: "text.onFill",
+        _hover: { backgroundColor: "bg.fill.brand.hover" },
+      },
+    },
+    // variant × colorScheme の全組み合わせを列挙する
+  ],
 });
 ```
 
@@ -189,12 +241,71 @@ export const ItemContent = withContext(Accordion.ItemContent, "itemContent");
 - icon-only の要素には `aria-label` を必須にする
 - disabled 状態は `aria-disabled` の使用を推奨する（HTML `disabled` 属性ではなく）
 
+### aria-disabled + クリックブロックパターン
+
+`aria-disabled` を使用する場合、HTML `disabled` 属性と異なりクリックイベントは発火する。`onClick` ハンドラ内で明示的にブロックする:
+
+```tsx
+const isDisabled = disabled || loading;
+
+const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+  if (isDisabled) {
+    e.preventDefault();
+    return;
+  }
+  onClick?.(e);
+};
+
+<StyledButton
+  aria-disabled={isDisabled || undefined}
+  data-disabled={isDisabled || undefined}
+  onClick={handleClick}
+/>
+```
+
+- `data-disabled` を付与することで Panda CSS の `_disabled` 条件セレクタが動作する
+- `aria-disabled` は `true` のときのみ付与する（`false` を渡さない）
+
+### ローディング状態のパターン
+
+ローディング中は内部 `Spinner` コンポーネントを表示し、クリックをブロックする:
+
+```tsx
+function Spinner() {
+  return (
+    <styled.svg
+      animation="spin 0.6s linear infinite"
+      aria-hidden="true"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <circle
+        cx="12" cy="12" r="10"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeDasharray="31.416"
+        strokeDashoffset="10"
+      />
+    </styled.svg>
+  );
+}
+```
+
+- `aria-hidden="true"` でスクリーンリーダーから隠す
+- `aria-busy={loading}` をコンポーネント本体に設定する
+- ローディング中は `onClick` をブロックする（`disabled` と同様に `isDisabled` で統合する）
+- `panda.config.ts` に `spin` キーフレームが定義済み
+
 ## 作業手順
 
 ### 1. 要件の確認
 
 - 対応する ADR があれば読み、MVP スコープを確認する
 - バリアント、サイズ、状態の一覧を確認する
+- 既存の `.pen` ファイルがあれば Pencil MCP ツールで読み取り、デザイン仕様を確認する（「Pencil デザインファイル」セクション参照）
 
 ### 2. トークンの確認・追加
 
@@ -225,7 +336,35 @@ export const ItemContent = withContext(Accordion.ItemContent, "itemContent");
 - `tags: ["autodocs"]` を付けて自動ドキュメント生成を有効にする
 - 各バリアント・サイズ・状態のストーリーを作成する
 - `play` 関数でインタラクションテストを書く（クリック、disabled/loading 時の挙動など）
-- import は `import type { Meta, StoryObj } from "@storybook/nextjs-vite"` と `import { expect, fn, userEvent, within } from "storybook/test"` を使う
+- Storybook 10 のポータブルストーリーパターンを使う（`Meta`, `StoryObj` は **使わない**）:
+
+```tsx
+import { expect, fn, userEvent, within } from "storybook/test";
+import preview from "../../../.storybook/preview";
+import { MyComponent } from "./my-component";
+
+const meta = preview.meta({
+  title: "Components/MyComponent",
+  component: MyComponent,
+  tags: ["autodocs"],
+  args: { onClick: fn() },
+});
+
+export const Default = meta.story({
+  args: { /* story-specific args */ },
+});
+
+export const WithInteraction = meta.story({
+  name: "Interaction Test",
+  args: { children: "テスト" },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const el = canvas.getByRole("button", { name: "テスト" });
+    await userEvent.click(el);
+    await expect(args.onClick).toHaveBeenCalledTimes(1);
+  },
+});
+```
 
 ### 7. 検証
 
