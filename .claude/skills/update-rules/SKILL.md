@@ -1,7 +1,6 @@
 ---
 name: update-rules
 description: 作業後に CLAUDE.md へ追加すべきルールや、新規作成すべきスキルがないか確認する
-disable-model-invocation: true
 ---
 
 現在の CLAUDE.md と .claude/skills/ 配下の既存スキルを読み、今回の作業内容を振り返ってください。
