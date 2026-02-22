@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 
+import preview from "../../../.storybook/preview";
 import { Button } from "./button";
 
-const meta = {
+const meta = preview.meta({
   title: "Components/Button",
   component: Button,
   parameters: {
@@ -34,100 +34,97 @@ const meta = {
     onClick: fn(),
     children: "ボタン",
   },
-} satisfies Meta<typeof Button>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+});
 
 // --- バリアント ---
 
-export const Solid: Story = {
+export const Solid = meta.story({
   args: {
     variant: "solid",
     children: "保存",
   },
-};
+});
 
-export const Outline: Story = {
+export const Outline = meta.story({
   args: {
     variant: "outline",
     children: "キャンセル",
   },
-};
+});
 
-export const Ghost: Story = {
+export const Ghost = meta.story({
   args: {
     variant: "ghost",
     children: "詳細",
   },
-};
+});
 
 // --- サイズ ---
 
-export const Small: Story = {
+export const Small = meta.story({
   args: {
     size: "sm",
     children: "Small",
   },
-};
+});
 
-export const Medium: Story = {
+export const Medium = meta.story({
   args: {
     size: "md",
     children: "Medium",
   },
-};
+});
 
-export const Large: Story = {
+export const Large = meta.story({
   args: {
     size: "lg",
     children: "Large",
   },
-};
+});
 
 // --- カラースキーム ---
 
-export const Danger: Story = {
+export const Danger = meta.story({
   args: {
     colorScheme: "danger",
     variant: "solid",
     children: "削除",
   },
-};
+});
 
-export const DangerOutline: Story = {
+export const DangerOutline = meta.story({
   name: "Danger (Outline)",
   args: {
     colorScheme: "danger",
     variant: "outline",
     children: "キャンセル",
   },
-};
+});
 
-export const DangerGhost: Story = {
+export const DangerGhost = meta.story({
   name: "Danger (Ghost)",
   args: {
     colorScheme: "danger",
     variant: "ghost",
     children: "削除",
   },
-};
+});
 
 // --- 状態 ---
 
-export const Loading: Story = {
+export const Loading = meta.story({
   args: {
     loading: true,
     children: "保存中...",
   },
-};
+});
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   args: {
     disabled: true,
     children: "送信不可",
   },
-};
+});
 
 // --- アイコン ---
 
@@ -146,34 +143,34 @@ const ArrowRightIcon = () => (
   </svg>
 );
 
-export const WithLeftIcon: Story = {
+export const WithLeftIcon = meta.story({
   name: "Left Icon",
   args: {
     leftIcon: <PlusIcon />,
     children: "追加",
   },
-};
+});
 
-export const WithRightIcon: Story = {
+export const WithRightIcon = meta.story({
   name: "Right Icon",
   args: {
     rightIcon: <ArrowRightIcon />,
     children: "次へ",
   },
-};
+});
 
-export const WithBothIcons: Story = {
+export const WithBothIcons = meta.story({
   name: "Both Icons",
   args: {
     leftIcon: <PlusIcon />,
     rightIcon: <ArrowRightIcon />,
     children: "追加して次へ",
   },
-};
+});
 
 // --- インタラクションテスト ---
 
-export const ClickTest: Story = {
+export const ClickTest = meta.story({
   name: "Click Test",
   args: {
     children: "クリックテスト",
@@ -185,9 +182,9 @@ export const ClickTest: Story = {
     await userEvent.click(button);
     await expect(args.onClick).toHaveBeenCalledTimes(1);
   },
-};
+});
 
-export const DisabledClickTest: Story = {
+export const DisabledClickTest = meta.story({
   name: "Disabled Click Prevention",
   args: {
     disabled: true,
@@ -200,9 +197,9 @@ export const DisabledClickTest: Story = {
     await userEvent.click(button);
     await expect(args.onClick).not.toHaveBeenCalled();
   },
-};
+});
 
-export const LoadingClickTest: Story = {
+export const LoadingClickTest = meta.story({
   name: "Loading Click Prevention",
   args: {
     loading: true,
@@ -215,4 +212,4 @@ export const LoadingClickTest: Story = {
     await userEvent.click(button);
     await expect(args.onClick).not.toHaveBeenCalled();
   },
-};
+});

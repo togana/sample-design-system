@@ -1,19 +1,15 @@
-import type { Preview, ReactRenderer } from "@storybook/nextjs-vite";
-import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { definePreview } from "@storybook/nextjs-vite";
+import addonA11y from "@storybook/addon-a11y";
+import addonThemes, {
+  withThemeByDataAttribute,
+} from "@storybook/addon-themes";
 
 import "../src/app/globals.css";
 
-const preview: Preview = {
-  parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-  },
+export default definePreview({
+  addons: [addonThemes(), addonA11y()],
   decorators: [
-    withThemeByDataAttribute<ReactRenderer>({
+    withThemeByDataAttribute({
       themes: {
         light: "light",
         dark: "dark",
@@ -22,6 +18,12 @@ const preview: Preview = {
       attributeName: "data-color-mode",
     }),
   ],
-};
-
-export default preview;
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+  },
+});
