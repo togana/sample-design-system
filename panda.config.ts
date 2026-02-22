@@ -2,6 +2,8 @@ import { defineConfig } from "@pandacss/dev";
 import {
   colors,
   spacing,
+  sizes,
+  radii,
   fontSizes,
   fontWeights,
   lineHeights,
@@ -35,6 +37,8 @@ export default defineConfig({
     tokens: {
       colors,
       spacing,
+      sizes,
+      radii,
       fontSizes,
       fontWeights,
       lineHeights,
