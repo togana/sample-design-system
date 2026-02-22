@@ -13,6 +13,13 @@
 - `src/components/` - デザインシステムのコンポーネントを配置する
 - `src/tokens/` - トークン定義ファイルを配置する
 
+## Panda CSS
+
+- `@pandacss/preset-base` を使用（utility 定義のみ、トークン値は含まない）
+- レシピで参照するトークンスケール（`radii`, `sizes`, `spacing` 等）は `src/tokens/` で必ず自前定義する
+- `sizes` トークンは `spacing` を含む形で定義済み（`height: "8"` → `spacing.8` = 32px）
+- トークン追加後は `npx panda codegen` で再生成する
+
 ## Storybook
 
 - ストーリーファイルはコンポーネントと同じディレクトリに `{name}.stories.tsx` として配置する

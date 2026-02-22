@@ -12,7 +12,7 @@ $ARGUMENTS の内容に基づいてデザイントークンを追加・修正し
 
 | 層 | 役割 | 配置先 |
 |---|---|---|
-| プリミティブ | 生の値（色相×スケール等） | `src/tokens/colors.ts`, `spacing.ts`, `typography.ts`, `shadows.ts`, `motion.ts` |
+| プリミティブ | 生の値（色相×スケール等） | `src/tokens/colors.ts`, `spacing.ts`, `sizes.ts`, `radii.ts`, `typography.ts`, `shadows.ts`, `motion.ts` |
 | セマンティック | 用途ベースの名前 | `src/tokens/semantic-colors.ts`, `semantic-spacing.ts` |
 
 ### セマンティックトークンの命名式
