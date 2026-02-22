@@ -17,3 +17,4 @@
 - `Co-Authored-By` は付けない
 - Conventional Commits のプレフィックスを付ける（例: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`, `ci:`）
 - 作業単位でコミットする。ひとまとまりの作業が完了したら `AskUserQuestion` ツールでコミットするか確認する
+- 独立した変更は分割してコミットする。1つのコミットに無関係な変更を混ぜない
