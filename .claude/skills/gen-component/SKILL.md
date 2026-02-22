@@ -144,13 +144,20 @@ export const buttonRecipe = cva({
       css: {
         backgroundColor: "bg.fill.brand",
         color: "text.onFill",
-        _hover: { backgroundColor: "bg.fill.brand.hover" },
+        "&:is(:hover, [data-hover]):not([data-disabled])": {
+          backgroundColor: "bg.fill.brand.hover",
+        },
+        "&:is(:active, [data-active]):not([data-disabled])": {
+          backgroundColor: "bg.fill.brand.hover",
+        },
       },
     },
     // variant × colorScheme の全組み合わせを列挙する
   ],
 });
 ```
+
+> **注意**: `_hover` / `_active` 条件は `aria-disabled` / `data-disabled` の状態を考慮しない。disabled 時に hover/active で色が変化しないよう、`&:is(:hover, [data-hover]):not([data-disabled])` のようにカスタムセレクタで `:not([data-disabled])` ガードを付ける。
 
 ### styled ファクトリの使用（ADR-006）
 

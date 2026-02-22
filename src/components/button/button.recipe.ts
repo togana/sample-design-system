@@ -67,8 +67,12 @@ export const buttonRecipe = cva({
       css: {
         backgroundColor: "bg.fill.brand",
         color: "text.onFill",
-        _hover: { backgroundColor: "bg.fill.brand.hover" },
-        _active: { backgroundColor: "bg.fill.brand.hover" },
+        "&:is(:hover, [data-hover]):not([data-disabled])": {
+          backgroundColor: "bg.fill.brand.hover",
+        },
+        "&:is(:active, [data-active]):not([data-disabled])": {
+          backgroundColor: "bg.fill.brand.hover",
+        },
       },
     },
     {
@@ -77,8 +81,12 @@ export const buttonRecipe = cva({
       css: {
         backgroundColor: "bg.fill.danger",
         color: "text.onFill",
-        _hover: { backgroundColor: "bg.fill.danger.hover" },
-        _active: { backgroundColor: "bg.fill.danger.hover" },
+        "&:is(:hover, [data-hover]):not([data-disabled])": {
+          backgroundColor: "bg.fill.danger.hover",
+        },
+        "&:is(:active, [data-active]):not([data-disabled])": {
+          backgroundColor: "bg.fill.danger.hover",
+        },
       },
     },
     {
@@ -87,8 +95,12 @@ export const buttonRecipe = cva({
       css: {
         borderColor: "border",
         color: "text.brand",
-        _hover: { backgroundColor: "bg.surface.hover" },
-        _active: { backgroundColor: "bg.surface.hover" },
+        "&:is(:hover, [data-hover]):not([data-disabled])": {
+          backgroundColor: "bg.surface.hover",
+        },
+        "&:is(:active, [data-active]):not([data-disabled])": {
+          backgroundColor: "bg.surface.hover",
+        },
       },
     },
     {
@@ -97,8 +109,12 @@ export const buttonRecipe = cva({
       css: {
         borderColor: "border.danger",
         color: "text.danger",
-        _hover: { backgroundColor: "bg.surface.hover" },
-        _active: { backgroundColor: "bg.surface.hover" },
+        "&:is(:hover, [data-hover]):not([data-disabled])": {
+          backgroundColor: "bg.surface.hover",
+        },
+        "&:is(:active, [data-active]):not([data-disabled])": {
+          backgroundColor: "bg.surface.hover",
+        },
       },
     },
     {
@@ -106,8 +122,12 @@ export const buttonRecipe = cva({
       colorScheme: "brand",
       css: {
         color: "text.brand",
-        _hover: { backgroundColor: "bg.subtle.hover" },
-        _active: { backgroundColor: "bg.subtle.hover" },
+        "&:is(:hover, [data-hover]):not([data-disabled])": {
+          backgroundColor: "bg.subtle.hover",
+        },
+        "&:is(:active, [data-active]):not([data-disabled])": {
+          backgroundColor: "bg.subtle.hover",
+        },
       },
     },
     {
@@ -115,8 +135,12 @@ export const buttonRecipe = cva({
       colorScheme: "danger",
       css: {
         color: "text.danger",
-        _hover: { backgroundColor: "bg.subtle.hover" },
-        _active: { backgroundColor: "bg.subtle.hover" },
+        "&:is(:hover, [data-hover]):not([data-disabled])": {
+          backgroundColor: "bg.subtle.hover",
+        },
+        "&:is(:active, [data-active]):not([data-disabled])": {
+          backgroundColor: "bg.subtle.hover",
+        },
       },
     },
   ],
