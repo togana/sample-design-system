@@ -8,6 +8,7 @@
 ## ディレクトリ構成
 
 - `docs/decisions/` - ADR（Architecture Decision Records）を配置する
+- `docs/components/` - コンポーネントのドキュメントを配置する
 - `src/components/` - デザインシステムのコンポーネントを配置する
 - `src/tokens/` - トークン定義ファイルを配置する
 
