@@ -24,7 +24,7 @@ src/components/{name}/
 ├── {name}.recipe.ts      # Panda CSS レシピ (cva)
 ├── {name}.pen            # Pencil デザインファイル
 ├── {name}.test.tsx       # テスト
-└── {name}.stories.tsx    # Storybook（対応した場合）
+└── {name}.stories.tsx    # Storybook ストーリー
 ```
 
 - `{name}` はケバブケース（例: `button`, `text-field`）
@@ -187,15 +187,25 @@ export function Button(props: ButtonProps) {
 
 - `src/components/{name}/index.ts` で re-export する
 
-### 6. 検証
+### 6. Storybook ストーリーの作成
+
+`src/components/{name}/{name}.stories.tsx` を作成する:
+
+- `tags: ["autodocs"]` を付けて自動ドキュメント生成を有効にする
+- 各バリアント・サイズ・状態のストーリーを作成する
+- `play` 関数でインタラクションテストを書く（クリック、disabled/loading 時の挙動など）
+- import は `import type { Meta, StoryObj } from "@storybook/nextjs-vite"` と `import { expect, fn, userEvent, within } from "storybook/test"` を使う
+
+### 7. 検証
 
 必ず以下を実行して成功を確認する:
 
 ```bash
 npx panda codegen
 npx tsc --noEmit
+npm run build-storybook
 ```
 
-### 7. 報告
+### 8. 報告
 
 生成したファイル一覧とコンポーネント API を報告し、AskUserQuestion でコミットするか確認する。
