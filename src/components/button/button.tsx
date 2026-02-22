@@ -1,9 +1,10 @@
 "use client";
 
-import type { ComponentPropsWithRef, MouseEvent, ReactNode } from "react";
-import { css, cx } from "../../../styled-system/css";
+import type { ComponentProps, MouseEvent, ReactNode } from "react";
+import { styled } from "../../../styled-system/jsx";
 import { buttonRecipe } from "./button.recipe";
-import type { ButtonVariantProps } from "./button.recipe";
+
+const StyledButton = styled("button", buttonRecipe);
 
 /**
  * icon-only ボタン（children なし）の場合は `aria-label` を必ず指定すること。
@@ -17,17 +18,16 @@ import type { ButtonVariantProps } from "./button.recipe";
  * <Button leftIcon={<CloseIcon />} aria-label="閉じる" />
  * ```
  */
-export type ButtonProps = ComponentPropsWithRef<"button"> &
-  ButtonVariantProps & {
-    loading?: boolean;
-    leftIcon?: ReactNode;
-    rightIcon?: ReactNode;
-  };
+export type ButtonProps = ComponentProps<typeof StyledButton> & {
+  loading?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+};
 
 function Spinner() {
   return (
-    <svg
-      className={css({ animation: "spin 0.6s linear infinite" })}
+    <styled.svg
+      animation="spin 0.6s linear infinite"
       aria-hidden="true"
       width="1em"
       height="1em"
@@ -44,7 +44,7 @@ function Spinner() {
         strokeDasharray="31.416"
         strokeDashoffset="10"
       />
-    </svg>
+    </styled.svg>
   );
 }
 
@@ -58,7 +58,6 @@ export function Button(props: ButtonProps) {
     disabled = false,
     leftIcon,
     rightIcon,
-    className,
     children,
     onClick,
     type = "button",
@@ -76,10 +75,12 @@ export function Button(props: ButtonProps) {
   };
 
   return (
-    <button
+    <StyledButton
       ref={ref}
       type={type}
-      className={cx(buttonRecipe({ variant, size, colorScheme }), className)}
+      variant={variant}
+      size={size}
+      colorScheme={colorScheme}
       aria-disabled={isDisabled || undefined}
       aria-busy={loading || undefined}
       data-disabled={isDisabled || undefined}
@@ -91,6 +92,6 @@ export function Button(props: ButtonProps) {
       {!loading && leftIcon && <span aria-hidden="true">{leftIcon}</span>}
       {children}
       {!loading && rightIcon && <span aria-hidden="true">{rightIcon}</span>}
-    </button>
+    </StyledButton>
   );
 }
