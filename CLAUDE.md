@@ -16,4 +16,4 @@
 - コミットメッセージは日本語で書く
 - `Co-Authored-By` は付けない
 - Conventional Commits のプレフィックスを付ける（例: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`, `ci:`）
-- 作業単位でコミットする。ひとまとまりの作業が完了したらコミットするか確認する
+- 作業単位でコミットする。ひとまとまりの作業が完了したら `AskUserQuestion` ツールでコミットするか確認する
