@@ -10,6 +10,17 @@
           }
         ]
       }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 10 /System/Library/Sounds/Ping.aiff"
+          }
+        ]
+      }
     ]
   }
 }
