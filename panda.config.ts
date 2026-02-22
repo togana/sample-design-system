@@ -13,6 +13,8 @@ import {
 } from "./src/tokens";
 
 export default defineConfig({
+  presets: ["@pandacss/preset-base"],
+
   preflight: true,
 
   include: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}"],
@@ -30,30 +32,28 @@ export default defineConfig({
         to: { transform: "rotate(360deg)" },
       },
     },
-    extend: {
-      tokens: {
-        colors,
-        spacing,
-        fontSizes,
-        fontWeights,
-        lineHeights,
-        shadows,
-        durations,
-        easings,
+    tokens: {
+      colors,
+      spacing,
+      fontSizes,
+      fontWeights,
+      lineHeights,
+      shadows,
+      durations,
+      easings,
+    },
+    semanticTokens: {
+      colors: semanticColors,
+      spacing: semanticSpacing,
+      fontSizes: {
+        body: { value: "{fontSizes.sm}" },
+        heading: { value: "{fontSizes.xl}" },
+        caption: { value: "{fontSizes.xs}" },
       },
-      semanticTokens: {
-        colors: semanticColors,
-        spacing: semanticSpacing,
-        fontSizes: {
-          body: { value: "{fontSizes.sm}" },
-          heading: { value: "{fontSizes.xl}" },
-          caption: { value: "{fontSizes.xs}" },
-        },
-        shadows: {
-          card: { value: "{shadows.sm}" },
-          dropdown: { value: "{shadows.md}" },
-          modal: { value: "{shadows.lg}" },
-        },
+      shadows: {
+        card: { value: "{shadows.sm}" },
+        dropdown: { value: "{shadows.md}" },
+        modal: { value: "{shadows.lg}" },
       },
     },
   },
