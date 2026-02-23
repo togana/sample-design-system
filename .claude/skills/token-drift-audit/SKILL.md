@@ -33,12 +33,13 @@ MCP が利用できない場合は「1b. ファイルからの手動収集」に
 - `src/tokens/typography.ts`
 - `src/tokens/shadows.ts`
 - `src/tokens/motion.ts`
-- `src/tokens/brands/default.ts`
 
 **セマンティックトークン:**
 
 - `src/tokens/semantic-colors.ts`
 - `src/tokens/semantic-spacing.ts`
+- `src/tokens/semantic-typography.ts`
+- `src/tokens/semantic-shadows.ts`
 
 **登録先:**
 
