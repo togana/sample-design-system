@@ -1,5 +1,19 @@
 import { defineConfig } from "@pandacss/dev";
-import { colors, semanticColors } from "./src/tokens";
+import {
+  borderWidths,
+  colors,
+  fontSizes,
+  fontWeights,
+  fonts,
+  lineHeights,
+  radii,
+  semanticColors,
+  shadows,
+  sizes,
+  spacing,
+  zIndex,
+} from "./src/tokens";
+import { textStyles } from "./src/styles";
 
 export default defineConfig({
   presets: ["@pandacss/preset-base"],
@@ -21,10 +35,21 @@ export default defineConfig({
   theme: {
     tokens: {
       colors,
+      spacing,
+      sizes,
+      fonts,
+      fontSizes,
+      fontWeights,
+      lineHeights,
+      radii,
+      borderWidths,
+      shadows,
+      zIndex,
     },
     semanticTokens: {
       colors: semanticColors,
     },
+    textStyles,
   },
 
   importMap: "@styled",
