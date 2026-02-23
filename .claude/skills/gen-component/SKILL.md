@@ -144,12 +144,8 @@ export const buttonRecipe = cva({
       css: {
         backgroundColor: "bg.fill.brand",
         color: "text.onFill",
-        "&:is(:hover, [data-hover]):not([data-disabled])": {
-          backgroundColor: "bg.fill.brand.hover",
-        },
-        "&:is(:active, [data-active]):not([data-disabled])": {
-          backgroundColor: "bg.fill.brand.hover",
-        },
+        _hover: { backgroundColor: "bg.fill.brand.hover" },
+        _active: { backgroundColor: "bg.fill.brand.hover" },
       },
     },
     // variant × colorScheme の全組み合わせを列挙する
@@ -157,7 +153,7 @@ export const buttonRecipe = cva({
 });
 ```
 
-> **注意**: `data-disabled` を使うコンポーネント（Button 等）では、`_hover` / `_active` が disabled 時にも適用されてしまう。この場合は `&:is(:hover, [data-hover]):not([data-disabled])` のようにカスタムセレクタで `:not([data-disabled])` ガードを付ける。disabled 状態を持たないコンポーネントでは `_hover` / `_active` をそのまま使ってよい。
+> **備考**: `panda.config.ts` で `_hover` / `_active` を `:not([data-disabled])` 付きに上書き済みのため、disabled 時の hover/active は自動的に無効化される。カスタムセレクタは不要。
 
 ### styled ファクトリの使用（ADR-006）
 
