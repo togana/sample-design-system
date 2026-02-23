@@ -63,14 +63,14 @@ export const DocsVariantGroup = styled("div", {
 });
 
 export const DocsText = styled("p", {
-  base: { color: "text.primary", fontSize: "sm", lineHeight: "relaxed" },
+  base: { color: "text.primary", fontSize: "sm", lineHeight: "loose" },
 });
 
 export const DocsList = styled("ul", {
   base: {
     color: "text.primary",
     fontSize: "sm",
-    lineHeight: "relaxed",
+    lineHeight: "loose",
     paddingInlineStart: "6",
     display: "flex",
     flexDirection: "column",
