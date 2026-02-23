@@ -12,6 +12,8 @@ import {
   easings,
   semanticColors,
   semanticSpacing,
+  semanticFontSizes,
+  semanticShadows,
 } from "./src/tokens";
 
 export default defineConfig({
@@ -52,16 +54,8 @@ export default defineConfig({
     semanticTokens: {
       colors: semanticColors,
       spacing: semanticSpacing,
-      fontSizes: {
-        body: { value: "{fontSizes.sm}" },
-        heading: { value: "{fontSizes.xl}" },
-        caption: { value: "{fontSizes.xs}" },
-      },
-      shadows: {
-        card: { value: "{shadows.sm}" },
-        dropdown: { value: "{shadows.md}" },
-        modal: { value: "{shadows.lg}" },
-      },
+      fontSizes: semanticFontSizes,
+      shadows: semanticShadows,
     },
   },
 

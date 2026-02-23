@@ -7,3 +7,5 @@ export { shadows } from "./shadows";
 export { durations, easings } from "./motion";
 export { semanticColors } from "./semantic-colors";
 export { semanticSpacing } from "./semantic-spacing";
+export { semanticFontSizes } from "./semantic-typography";
+export { semanticShadows } from "./semantic-shadows";
