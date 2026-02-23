@@ -125,7 +125,6 @@ conditions: {
 | elevation | `shadows.{サイズ}` | `shadows.{用途}` |
 | borders | `borderWidths.{サイズ}` | `borderWidths.{用途}` |
 | zIndex | `zIndex.{名前}` | ― |
-| motion | `durations.{名前}`, `easings.{名前}` | ― |
 
 ### アクセシビリティ基準
 
