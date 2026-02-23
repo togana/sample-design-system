@@ -1,5 +1,6 @@
 import { definePreview } from "@storybook/nextjs-vite";
 import addonA11y from "@storybook/addon-a11y";
+import addonDocs from "@storybook/addon-docs";
 import addonThemes, {
   withThemeByDataAttribute,
 } from "@storybook/addon-themes";
@@ -7,7 +8,7 @@ import addonThemes, {
 import "../src/app/globals.css";
 
 export default definePreview({
-  addons: [addonThemes(), addonA11y()],
+  addons: [addonDocs(), addonThemes(), addonA11y()],
   decorators: [
     withThemeByDataAttribute({
       themes: {

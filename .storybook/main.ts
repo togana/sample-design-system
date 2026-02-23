@@ -7,6 +7,7 @@ export default defineMain({
   },
   stories: ["../src/**/*.stories.@(ts|tsx)"],
   addons: [
+    "@storybook/addon-docs",
     "@storybook/addon-themes",
     "@storybook/addon-a11y",
     {

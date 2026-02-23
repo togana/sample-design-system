@@ -2,32 +2,62 @@ import { expect, fn, userEvent, within } from "storybook/test";
 
 import preview from "../../../.storybook/preview";
 import { Button } from "./button";
+import { ButtonDocsPage } from "./button.docs";
 
 const meta = preview.meta({
   title: "Components/Button",
   component: Button,
+  tags: ["autodocs"],
   parameters: {
     layout: "centered",
+    docs: {
+      page: ButtonDocsPage,
+    },
   },
-  tags: ["autodocs"],
   argTypes: {
     variant: {
       control: { type: "select" },
       options: ["solid", "outline", "ghost"],
+      description: "ボタンの視覚スタイル",
+      table: { type: { summary: '"solid" | "outline" | "ghost"' }, defaultValue: { summary: '"solid"' } },
     },
     size: {
       control: { type: "select" },
       options: ["sm", "md", "lg"],
+      description: "ボタンのサイズ",
+      table: { type: { summary: '"sm" | "md" | "lg"' }, defaultValue: { summary: '"md"' } },
     },
     colorScheme: {
       control: { type: "select" },
       options: ["brand", "danger"],
+      description: "カラースキーム",
+      table: { type: { summary: '"brand" | "danger"' }, defaultValue: { summary: '"brand"' } },
     },
     loading: {
       control: { type: "boolean" },
+      description: "ローディング状態。Spinner を表示しクリックを無効化する",
+      table: { type: { summary: "boolean" }, defaultValue: { summary: "false" } },
     },
     disabled: {
       control: { type: "boolean" },
+      description: "無効状態。aria-disabled を設定しクリックを無効化する",
+      table: { type: { summary: "boolean" }, defaultValue: { summary: "false" } },
+    },
+    onClick: {
+      description: "クリック時のコールバック",
+      table: { type: { summary: "(e: MouseEvent) => void" } },
+    },
+    children: {
+      description: "ボタンのラベルテキスト",
+      table: { type: { summary: "ReactNode" } },
+    },
+    leftIcon: {
+      description: "ボタン左側に表示するアイコン",
+      table: { type: { summary: "ReactNode" } },
+    },
+    rightIcon: {
+      description: "ボタン右側に表示するアイコン",
+      table: { type: { summary: "ReactNode" } },
     },
   },
   args: {
