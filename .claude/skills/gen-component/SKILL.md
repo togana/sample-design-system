@@ -23,6 +23,7 @@ src/components/{name}/
 ├── {name}.tsx            # メインコンポーネント
 ├── {name}.recipe.ts      # Panda CSS レシピ (cva)
 ├── {name}.pen            # Pencil デザインファイル
+├── {name}.docs.tsx       # Storybook Docs ページ（/gen-component-doc で生成）
 ├── {name}.test.tsx       # テスト
 └── {name}.stories.tsx    # Storybook ストーリー
 ```
