@@ -7,12 +7,12 @@ import {
   fonts,
   lineHeights,
   radii,
-  semanticColors,
   shadows,
   sizes,
   spacing,
   zIndex,
 } from "./src/tokens";
+import { colors as semanticColors } from "./src/semantic-tokens";
 import { textStyles } from "./src/styles";
 
 export default defineConfig({

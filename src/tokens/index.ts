@@ -1,5 +1,4 @@
 export { colors } from "./colors";
-export { semanticColors } from "./semantic-colors";
 export { spacing } from "./spacing";
 export { sizes } from "./sizes";
 export { fonts } from "./fonts";
