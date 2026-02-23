@@ -71,7 +71,7 @@ export const buttonRecipe = cva({
           backgroundColor: "bg.fill.brand.hover",
         },
         _active: {
-          backgroundColor: "bg.fill.brand.hover",
+          backgroundColor: "bg.fill.brand.active",
         },
       },
     },
@@ -85,7 +85,7 @@ export const buttonRecipe = cva({
           backgroundColor: "bg.fill.danger.hover",
         },
         _active: {
-          backgroundColor: "bg.fill.danger.hover",
+          backgroundColor: "bg.fill.danger.active",
         },
       },
     },
@@ -99,7 +99,7 @@ export const buttonRecipe = cva({
           backgroundColor: "bg.surface.hover",
         },
         _active: {
-          backgroundColor: "bg.surface.hover",
+          backgroundColor: "bg.surface.active",
         },
       },
     },
@@ -113,7 +113,7 @@ export const buttonRecipe = cva({
           backgroundColor: "bg.surface.hover",
         },
         _active: {
-          backgroundColor: "bg.surface.hover",
+          backgroundColor: "bg.surface.active",
         },
       },
     },
@@ -126,7 +126,7 @@ export const buttonRecipe = cva({
           backgroundColor: "bg.subtle.hover",
         },
         _active: {
-          backgroundColor: "bg.subtle.hover",
+          backgroundColor: "bg.subtle.active",
         },
       },
     },
@@ -139,7 +139,7 @@ export const buttonRecipe = cva({
           backgroundColor: "bg.subtle.hover",
         },
         _active: {
-          backgroundColor: "bg.subtle.hover",
+          backgroundColor: "bg.subtle.active",
         },
       },
     },

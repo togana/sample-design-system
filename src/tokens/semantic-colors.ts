@@ -13,6 +13,9 @@ export const semanticColors: SemanticTokens["colors"] = {
       hover: {
         value: { base: "{colors.gray.100}", _dark: "{colors.gray.800}" },
       },
+      active: {
+        value: { base: "{colors.gray.200}", _dark: "{colors.gray.700}" },
+      },
     },
     surface: {
       DEFAULT: {
@@ -20,6 +23,9 @@ export const semanticColors: SemanticTokens["colors"] = {
       },
       hover: {
         value: { base: "{colors.gray.50}", _dark: "{colors.gray.800}" },
+      },
+      active: {
+        value: { base: "{colors.gray.100}", _dark: "{colors.gray.700}" },
       },
     },
     fill: {
@@ -30,6 +36,9 @@ export const semanticColors: SemanticTokens["colors"] = {
         hover: {
           value: { base: "{colors.blue.700}", _dark: "{colors.blue.400}" },
         },
+        active: {
+          value: { base: "{colors.blue.800}", _dark: "{colors.blue.300}" },
+        },
       },
       danger: {
         DEFAULT: {
@@ -37,6 +46,9 @@ export const semanticColors: SemanticTokens["colors"] = {
         },
         hover: {
           value: { base: "{colors.red.700}", _dark: "{colors.red.400}" },
+        },
+        active: {
+          value: { base: "{colors.red.800}", _dark: "{colors.red.300}" },
         },
       },
       success: {
