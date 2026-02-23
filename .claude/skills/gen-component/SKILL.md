@@ -370,7 +370,24 @@ export const WithInteraction = meta.story({
 });
 ```
 
-### 7. 検証
+### 7. Docs ページの生成
+
+ストーリー作成後、`/gen-component-doc` スキルを実行してカスタム Docs ページ（`{name}.docs.tsx`）を生成する。Docs ページが生成されたら、ストーリーの `parameters.docs.page` に設定する:
+
+```tsx
+import { ButtonDocsPage } from "./button.docs";
+
+const meta = preview.meta({
+  // ...
+  parameters: {
+    docs: {
+      page: ButtonDocsPage,
+    },
+  },
+});
+```
+
+### 8. 検証
 
 必ず以下を実行して成功を確認する:
 
@@ -380,6 +397,10 @@ npx tsc --noEmit
 npm run build-storybook
 ```
 
-### 8. 報告
+### 9. 品質監査
+
+`/component-audit` スキルを実行し、生成したコンポーネントの品質を検証する。critical の指摘があれば修正してから次のステップに進む。
+
+### 10. 報告
 
 生成したファイル一覧とコンポーネント API を報告し、AskUserQuestion でコミットするか確認する。
