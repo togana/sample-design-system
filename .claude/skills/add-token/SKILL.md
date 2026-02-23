@@ -17,44 +17,45 @@ $ARGUMENTS の内容に基づいてデザイントークンを追加・修正し
 
 ### セマンティックカラーのロール体系（3区分）
 
-#### Impression（印象）— 各ロールに4バリエーション
+> 詳細な用途・UI例は `docs/research/color-role-guide.md` を参照。
 
-| ロール | 用途 | 参照プリミティブ |
-|--------|------|------------------|
-| `primary` | ブランド認識・主要アクション | blue 系 |
-| `secondary` | 補助的な役割 | gray 系 |
-| `tertiary` | 第三の補助色 | 未定 |
-| `positive` | 成功・完了 | green 系 |
-| `negative` | エラー・失敗 | red 系 |
-| `notice` | 警告・注意喚起 | yellow 系 |
+#### on/Container パターン（前景・背景の分離）
 
-**バリエーション（ドット区切りネスト）:**
+アクセシビリティとダークモード対応のため、前景色と背景色を分離して定義する:
 
-```ts
-colors: {
-  primary: {
-    DEFAULT:     { value: { base: "...", _dark: "..." } },  // ロール色そのもの
-    on:          { value: { base: "...", _dark: "..." } },  // ロール色上の前景色
-    container:   { value: { base: "...", _dark: "..." } },  // 大面積背景
-    onContainer: { value: { base: "...", _dark: "..." } },  // 大面積背景上の前景色
-  },
-}
-```
+- `DEFAULT` — ロール色そのもの（小面積・高強調: ボタン塗り、アイコン）
+- `on` — DEFAULT の上に載せる前景色（ボタンラベル等）
+- `container` — 大面積の控えめな背景色（Badge・Alert 背景等）
+- `onContainer` — container の上に載せる前景色
+
+#### Impression（印象）
+
+| ロール | 用途 | 参照プリミティブ | バリエーション |
+|--------|------|------------------|---------------|
+| `primary` | ブランドを象徴、UIの重要度を示す | blue 系 | DEFAULT, on, container, onContainer |
+| `secondary` | primary の補助 | blue 系 | DEFAULT, on, container, onContainer |
+| `tertiary` | 第三の補助色 | blue 系 | DEFAULT, on, container, onContainer |
+| `positive` | 成功・完了・安全 | green 系 | 上記4つ + containerVariant, onContainerVariant |
+| `negative` | エラー・失敗・危険 | red 系 | 上記4つ + containerVariant, onContainerVariant |
+| `notice` | 警告・注意喚起 | yellow 系 | 上記4つ + containerVariant, onContainerVariant |
 
 #### Component（構成）
 
 | ロール | バリエーション |
 |--------|---------------|
-| `surface` | `DEFAULT`, `on` |
+| `surface` | `DEFAULT`, `on`, `onVariant`, `dim`, `bright`, `container`, `containerBright`, `containerDim`, `inverse`, `inverseOn`, `inversePrimary` |
 | `outline` | `DEFAULT`, `bright`, `dim` |
+| `scrim` | （バリエーションなし。半透明オーバーレイ用） |
 
 #### Interaction（インタラクション）
 
-| ロール | 用途 |
-|--------|------|
-| `hovered` | ホバー状態（半透明レイヤー） |
-| `selected` | 選択状態 |
-| `disabled` | 非活性状態 |
+半透明色を状態レイヤーとして要素の上に重ねる方式。
+
+| ロール | バリエーション |
+|--------|---------------|
+| `hovered` | `DEFAULT`, `variant`, `onPrimary` |
+| `selected` | `DEFAULT`, `surface` |
+| `disabled` | `DEFAULT`, `onSurface` |
 
 ### セマンティックトークンの命名式
 
