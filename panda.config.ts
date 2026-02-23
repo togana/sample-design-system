@@ -1,20 +1,4 @@
 import { defineConfig } from "@pandacss/dev";
-import {
-  colors,
-  spacing,
-  sizes,
-  radii,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  shadows,
-  durations,
-  easings,
-  semanticColors,
-  semanticSpacing,
-  semanticFontSizes,
-  semanticShadows,
-} from "./src/tokens";
 
 export default defineConfig({
   presets: ["@pandacss/preset-base"],
@@ -31,32 +15,6 @@ export default defineConfig({
     // preset-base の _hover / _active を上書きし、data-disabled 時はスタイルを適用しない
     hover: "&:is(:hover, [data-hover]):not([data-disabled])",
     active: "&:is(:active, [data-active]):not([data-disabled])",
-  },
-
-  theme: {
-    keyframes: {
-      spin: {
-        to: { transform: "rotate(360deg)" },
-      },
-    },
-    tokens: {
-      colors,
-      spacing,
-      sizes,
-      radii,
-      fontSizes,
-      fontWeights,
-      lineHeights,
-      shadows,
-      durations,
-      easings,
-    },
-    semanticTokens: {
-      colors: semanticColors,
-      spacing: semanticSpacing,
-      fontSizes: semanticFontSizes,
-      shadows: semanticShadows,
-    },
   },
 
   importMap: "@styled",
