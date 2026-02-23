@@ -12,8 +12,8 @@ $ARGUMENTS の内容に基づいてデザイントークンを追加・修正し
 
 | 層 | 役割 | 配置先 |
 |---|---|---|
-| プリミティブ | 生の値（色相×スケール等） | `src/tokens/colors.ts`, `spacing.ts`, `sizes.ts`, `radii.ts`, `fonts.ts`, `font-sizes.ts`, `font-weights.ts`, `line-heights.ts`, `shadows.ts`, `borders.ts`, `z-index.ts` |
-| セマンティック | 用途ベースの名前 | `src/semantic-tokens/colors.ts` 等（カテゴリごとにファイルを分割） |
+| プリミティブ | 生の値（色相×スケール等） | `src/preset/theme/tokens/colors.ts`, `spacing.ts`, `sizes.ts`, `radii.ts`, `fonts.ts`, `font-sizes.ts`, `font-weights.ts`, `line-heights.ts`, `shadows.ts`, `borders.ts`, `z-index.ts` |
+| セマンティック | 用途ベースの名前 | `src/preset/theme/semantic-tokens/colors.ts` 等（カテゴリごとにファイルを分割） |
 
 ### セマンティックカラーのロール体系（3区分）
 
@@ -84,7 +84,7 @@ colors: {
 
 - カラーは Serendie Design System 準拠の10段階スケール: `100, 200, 300, 400, 500, 600, 700, 800, 900, 1000`
 - 初期色相: `gray`, `blue`, `red`, `green`, `yellow`
-- 新しい色相を追加する場合は `src/tokens/colors.ts` に10段階すべてを定義する
+- 新しい色相を追加する場合は `src/preset/theme/tokens/colors.ts` に10段階すべてを定義する
 
 ### ダークモードのルール
 
@@ -128,8 +128,8 @@ colors: {
 
 ### 3. 実装
 
-- プリミティブの追加が必要なら `src/tokens/` の該当ファイルを編集する
-- セマンティックトークンは `src/semantic-tokens/` の該当ファイルを編集する
+- プリミティブの追加が必要なら `src/preset/theme/tokens/` の該当ファイルを編集する
+- セマンティックトークンは `src/preset/theme/semantic-tokens/` の該当ファイルを編集する
 - 新しいエクスポートを追加した場合は各ディレクトリの `index.ts` と `panda.config.ts` も更新する
 
 ### 4. 検証

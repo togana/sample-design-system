@@ -11,12 +11,15 @@
 - `docs/decisions/` - ADR（Architecture Decision Records）を配置する
 - `docs/research/` - 外部ライブラリやデザインシステムの調査ドキュメントを配置する
 - `src/components/` - デザインシステムのコンポーネントを配置する（ドキュメント `{name}.docs.tsx` もここにコロケーションする）
-- `src/tokens/` - トークン定義ファイルを配置する
+- `src/preset/` - Panda CSS preset 関連ファイル（conditions, theme）を配置する
+  - `src/preset/theme/tokens/` - プリミティブトークン定義
+  - `src/preset/theme/semantic-tokens/` - セマンティックトークン定義
+  - `src/preset/theme/styles/` - テキストスタイル等
 
 ## Panda CSS
 
 - `@pandacss/preset-base` を使用（utility 定義のみ、トークン値は含まない）
-- レシピで参照するトークンスケール（`radii`, `sizes`, `spacing` 等）は `src/tokens/` で必ず自前定義する
+- レシピで参照するトークンスケール（`radii`, `sizes`, `spacing` 等）は `src/preset/theme/tokens/` で必ず自前定義する
 - `sizes` トークンは `spacing` を含む形で定義済み（`height: "8"` → `spacing.8` = 32px）
 - トークン追加後は `npx panda codegen` で再生成する
 
