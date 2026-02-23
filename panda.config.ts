@@ -59,6 +59,8 @@ export default defineConfig({
     },
   },
 
+  importMap: "@styled",
+
   jsxFramework: "react",
 
   outdir: "styled-system",

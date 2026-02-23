@@ -17,7 +17,10 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@styled/*": ["./styled-system/*"]
+    }
   },
   "include": [
     "next-env.d.ts",

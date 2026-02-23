@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentProps, MouseEvent, ReactNode } from "react";
-import { styled } from "../../../styled-system/jsx";
+import { styled } from "@styled/jsx";
 import { buttonRecipe } from "./button.recipe";
 
 const StyledButton = styled("button", buttonRecipe);

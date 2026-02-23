@@ -1,4 +1,4 @@
-import { styled } from "../styled-system/jsx";
+import { styled } from "@styled/jsx";
 
 export const DocsContainer = styled("div", {
   base: {
