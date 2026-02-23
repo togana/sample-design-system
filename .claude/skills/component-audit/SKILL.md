@@ -53,7 +53,7 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 |---|------------|--------|
 | X1 | キーボード操作: Tab, Enter, Space, Escape が適切に動作するか | critical |
 | X2 | ARIA 属性: `role`, `aria-label`, `aria-expanded`, `aria-disabled` 等が適切か | critical |
-| X3 | カラーコントラスト: テキスト 4.5:1、大テキスト 3:1（WCAG AA）を満たすか | warning |
+| X3 | カラーコントラスト: APCA Lc 75以上（大テキストは Lc 60以上）を満たすか（ADR-001 準拠） | warning |
 | X4 | フォーカスリングが `focus-visible` で visible になっているか（`outline: none` で消していないか） | critical |
 | X5 | icon-only の要素に `aria-label` が付与されているか | critical |
 | X6 | disabled 状態で `aria-disabled` を使っているか（HTML `disabled` 属性ではなく） | info |

@@ -12,8 +12,8 @@ $ARGUMENTS の内容に基づいてデザイントークンを追加・修正し
 
 | 層 | 役割 | 配置先 |
 |---|---|---|
-| プリミティブ | 生の値（色相×スケール等） | `src/tokens/colors.ts`, `spacing.ts`, `sizes.ts`, `radii.ts`, `typography.ts`, `shadows.ts`, `motion.ts`, `borders.ts`, `z-index.ts` |
-| セマンティック | 用途ベースの名前 | `src/tokens/semantic-colors.ts`, `semantic-spacing.ts` |
+| プリミティブ | 生の値（色相×スケール等） | `src/tokens/colors.ts`, `spacing.ts`, `sizes.ts`, `radii.ts`, `fonts.ts`, `font-sizes.ts`, `font-weights.ts`, `line-heights.ts`, `shadows.ts`, `borders.ts`, `z-index.ts` |
+| セマンティック | 用途ベースの名前 | `src/semantic-tokens/colors.ts` 等（カテゴリごとにファイルを分割） |
 
 ### セマンティックカラーのロール体系（3区分）
 
@@ -113,7 +113,6 @@ colors: {
 | elevation | `shadows.{サイズ}` | `shadows.{用途}` |
 | borders | `borderWidths.{サイズ}` | `borderWidths.{用途}` |
 | zIndex | `zIndex.{名前}` | ― |
-| motion | `durations.{名前}`, `easings.{名前}` | ― |
 
 ## 作業手順
 
@@ -130,8 +129,8 @@ colors: {
 ### 3. 実装
 
 - プリミティブの追加が必要なら `src/tokens/` の該当ファイルを編集する
-- セマンティックトークンは `src/tokens/semantic-*.ts` を編集する
-- 新しいエクスポートを追加した場合は `src/tokens/index.ts` と `panda.config.ts` も更新する
+- セマンティックトークンは `src/semantic-tokens/` の該当ファイルを編集する
+- 新しいエクスポートを追加した場合は各ディレクトリの `index.ts` と `panda.config.ts` も更新する
 
 ### 4. 検証
 
