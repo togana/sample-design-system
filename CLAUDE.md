@@ -9,8 +9,8 @@
 
 - `.storybook/` - Storybook の設定ファイルを配置する
 - `docs/decisions/` - ADR（Architecture Decision Records）を配置する
-- `docs/components/` - コンポーネントのドキュメントを配置する
-- `src/components/` - デザインシステムのコンポーネントを配置する
+- `docs/research/` - 外部ライブラリやデザインシステムの調査ドキュメントを配置する
+- `src/components/` - デザインシステムのコンポーネントを配置する（ドキュメント `{name}.docs.tsx` もここにコロケーションする）
 - `src/tokens/` - トークン定義ファイルを配置する
 
 ## Panda CSS
