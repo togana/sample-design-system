@@ -13,6 +13,7 @@ import {
 } from "./tokens";
 import { colors as semanticColors } from "./semantic-tokens";
 import { textStyles } from "./styles";
+import { keyframes } from "./keyframes";
 
 export const theme = {
   tokens: {
@@ -32,4 +33,5 @@ export const theme = {
     colors: semanticColors,
   },
   textStyles,
+  keyframes,
 };
