@@ -27,6 +27,13 @@ $ARGUMENTS で指定されたコンポーネントのソースコードを読み
 - `{name}.stories.tsx` の `parameters.docs.page` にそのコンポーネントを指定する
 - Storybook の MDX レンダラーを使わず、自前の React コンポーネントで Docs タブを描画する
 
+### stories と docs の役割分担
+
+- **`{name}.stories.tsx`** — `play` 関数付きインタラクションテストのみ（`tags: ["!dev"]` でサイドバー非表示）
+- **`{name}.docs.tsx`** — 全バリアント・サイズ・状態のビジュアルショーケース、Do/Don't、アクセシビリティ情報
+
+バリアント・サイズ・状態の描画は docs.tsx に集約する。stories.tsx にビジュアルショーケース用のストーリーは作らない。
+
 ### stories への接続
 
 `{name}.stories.tsx` に以下が設定されていることを確認し、なければ追加する:

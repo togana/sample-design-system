@@ -31,9 +31,19 @@
 
 ## Storybook
 
-- ストーリーファイルはコンポーネントと同じディレクトリに `{name}.stories.tsx` として配置する
-- `tags: ["autodocs"]` を付けて自動ドキュメント生成を有効にする
-- インタラクションテスト（`play` 関数）で主要な操作を検証する
+### stories と docs の役割分担
+
+- `{name}.stories.tsx` — **autodocs 接続 + インタラクションテスト専用**
+  - `play` 関数付きのインタラクションテストのみ配置する（`tags: ["!dev"]` でサイドバー非表示）
+  - バリアント・サイズ・状態のビジュアルショーケースは **書かない**（docs に集約）
+- `{name}.docs.tsx` — **ビジュアルショーケース + ガイドライン**
+  - 全バリアント・サイズ・状態の描画、Do/Don't、アクセシビリティ情報を配置する
+  - `parameters.docs.page` 経由で Docs タブに接続する
+
+### テスト
+
+- Storybook のインタラクションテスト（`play` 関数）は Vitest で実行する
+- `npm run test-storybook` でインタラクションテストを実行
 - `npm run storybook` で開発サーバー起動、`npm run build-storybook` でビルド
 
 ## コミット

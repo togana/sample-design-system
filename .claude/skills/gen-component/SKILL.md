@@ -335,31 +335,38 @@ function Spinner() {
 
 ### 6. Storybook ストーリーの作成
 
-`src/components/{name}/{name}.stories.tsx` を作成する:
+`src/components/{name}/{name}.stories.tsx` を作成する。
 
-- `tags: ["autodocs"]` を付けて自動ドキュメント生成を有効にする
-- 各バリアント・サイズ・状態のストーリーを作成する
-- `play` 関数でインタラクションテストを書く（クリック、disabled/loading 時の挙動など）
-- Storybook 10 のポータブルストーリーパターンを使う（`Meta`, `StoryObj` は **使わない**）:
+**stories の役割はインタラクションテスト専用。** バリアント・サイズ・状態のビジュアルショーケースは `docs.tsx` に集約する。
+
+- `play` 関数付きのインタラクションテストを書く（クリック、disabled/loading 時の挙動など）
+- インタラクションテストには `tags: ["!dev"]` を付けてサイドバーから非表示にする
+- Storybook 10 のポータブルストーリーパターンを使う（`Meta`, `StoryObj` は **使わない**）
 
 ```tsx
 import { expect, fn, userEvent, within } from "storybook/test";
 import preview from "../../../.storybook/preview";
 import { MyComponent } from "./my-component";
+import { MyComponentDocsPage } from "./my-component.docs";
 
 const meta = preview.meta({
   title: "Components/MyComponent",
   component: MyComponent,
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      page: MyComponentDocsPage,
+    },
+  },
   args: { onClick: fn() },
 });
 
-export const Default = meta.story({
-  args: { /* story-specific args */ },
-});
+export default meta;
 
-export const WithInteraction = meta.story({
-  name: "Interaction Test",
+// インタラクションテスト（サイドバー非表示）
+export const ClickInteraction = meta.story({
+  name: "Click Interaction",
+  tags: ["!dev"],
   args: { children: "テスト" },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
@@ -372,20 +379,9 @@ export const WithInteraction = meta.story({
 
 ### 7. Docs ページの生成
 
-ストーリー作成後、`/gen-component-doc` スキルを実行してカスタム Docs ページ（`{name}.docs.tsx`）を生成する。Docs ページが生成されたら、ストーリーの `parameters.docs.page` に設定する:
+ストーリー作成後、`/gen-component-doc` スキルを実行してカスタム Docs ページ（`{name}.docs.tsx`）を生成する。
 
-```tsx
-import { ButtonDocsPage } from "./button.docs";
-
-const meta = preview.meta({
-  // ...
-  parameters: {
-    docs: {
-      page: ButtonDocsPage,
-    },
-  },
-});
-```
+docs.tsx は全バリアント・サイズ・状態のビジュアルショーケース、Do/Don't、アクセシビリティ情報を含む。stories.tsx の `parameters.docs.page` で Docs タブに接続する。
 
 ### 8. 検証
 
@@ -395,6 +391,7 @@ const meta = preview.meta({
 npx panda codegen
 npx tsc --noEmit
 npm run build-storybook
+npm run test-storybook
 ```
 
 ### 9. 品質監査
