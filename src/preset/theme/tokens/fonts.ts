@@ -6,6 +6,8 @@ import { defineTokens } from "@pandacss/dev";
  * @see https://github.com/serendie/design-token/blob/main/tokens/reference/typography.default.json
  */
 export const fonts = defineTokens.fonts({
-  primary: { value: "Roboto, 'Noto Sans JP', sans-serif" },
-  monospace: { value: "'Noto Sans Mono', monospace" },
+  primary: {
+    value: "var(--font-roboto), var(--font-noto-sans-jp), sans-serif",
+  },
+  monospace: { value: "var(--font-noto-sans-mono), monospace" },
 });

@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto, Noto_Sans_JP, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const roboto = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+});
+
+const notoSansMono = Noto_Sans_Mono({
+  variable: "--font-noto-sans-mono",
   subsets: ["latin"],
 });
 
@@ -23,8 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="ja"
+      className={`${roboto.variable} ${notoSansJP.variable} ${notoSansMono.variable}`}
+    >
+      <body>
         {children}
       </body>
     </html>
