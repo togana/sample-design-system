@@ -23,6 +23,12 @@
 - `sizes` トークンは `spacing` を含む形で定義済み（`height: "8"` → `spacing.8` = 32px）
 - トークン追加後は `npx panda codegen` で再生成する
 
+### スタイリングルール（プロジェクト全体）
+
+- `css()` 関数は使わない → `styled` ファクトリ（`styled.div`, `styled.p` 等）で代替する
+- `style` prop による直接スタイル指定は禁止 → `styled` ファクトリの props で指定する
+- パターンコンポーネント（`Box`, `Flex`, `Stack` 等）は使わない
+
 ## Storybook
 
 - ストーリーファイルはコンポーネントと同じディレクトリに `{name}.stories.tsx` として配置する
