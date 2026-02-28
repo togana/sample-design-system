@@ -37,3 +37,16 @@
 - Conventional Commits のプレフィックスを付ける（例: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`, `ci:`）
 - 作業単位でコミットする。ひとまとまりの作業が完了したら `AskUserQuestion` ツールでコミットするか確認する
 - 独立した変更は分割してコミットする。1つのコミットに無関係な変更を混ぜない
+
+## コード調査
+- コードベースの理解や調査には **`/ts-explore` スキル**を使用すること
+  - 型情報の確認（hover）、定義・実装へのジャンプ（goToDefinition/goToImplementation）、呼び出し関係の追跡（callHierarchy）、ファイル・プロジェクト構造の把握（documentSymbol/workspaceSymbol）が可能
+
+## リファクタリング
+- TypeScriptコードのリファクタリングには **`/ts-refactor` スキル**を使用すること
+  - findReferences/callHierarchyで影響範囲を事前調査し、renameで安全にリネーム、getDiagnosticsで検証する
+
+## 型エラー診断
+- TypeScriptの型エラー診断・修正には **`/ts-diagnostics` スキル**を使用すること
+  - getDiagnosticsでエラー検出し、hover/goToDefinition/findReferencesで分析・修正する
+  - PR変更ファイルの型チェック（コードレビュー）にも対応

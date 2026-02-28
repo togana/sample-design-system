@@ -1,4 +1,19 @@
 {
+  "env": {
+    "ENABLE_LSP_TOOL": "1"
+  },
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "mcp__storybook-mcp__list-all-documentation",
+      "mcp__storybook-mcp__get-documentation",
+      "mcp__storybook-mcp__preview-stories",
+      "mcp__panda__get_conditions"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -23,15 +38,8 @@
       }
     ]
   },
-  "permissions": {
-    "allow": [
-      "WebSearch",
-      "mcp__context7__resolve-library-id",
-      "mcp__context7__query-docs",
-      "mcp__storybook-mcp__list-all-documentation",
-      "mcp__storybook-mcp__get-documentation",
-      "mcp__storybook-mcp__preview-stories",
-      "mcp__panda__get_conditions"
-    ]
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true
   }
 }
