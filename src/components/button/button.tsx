@@ -1,23 +1,43 @@
 "use client";
 
-import type { ComponentProps, MouseEvent, ReactElement } from "react";
+import type { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "@styled/jsx";
 import { buttonRecipe } from "./button.recipe";
 
 const StyledButton = styled("button", buttonRecipe);
-
-type StyledButtonProps = ComponentProps<typeof StyledButton>;
 
 // leftIcon と rightIcon の排他型
 type IconProps =
   | { leftIcon?: ReactElement; rightIcon?: never }
   | { leftIcon?: never; rightIcon?: ReactElement };
 
-export type ButtonProps = Omit<StyledButtonProps, "disabled"> &
-  IconProps & {
-    isLoading?: boolean;
-    disabled?: boolean;
-  };
+export type ButtonProps = IconProps & {
+  /** ボタンのラベル */
+  children: ReactNode;
+  /**
+   * ボタンのスタイルバリアント。
+   * @default "filled"
+   */
+  styleType?: "filled" | "outlined" | "ghost" | "rectangle";
+  /**
+   * ボタンのサイズ。
+   * @default "medium"
+   */
+  size?: "medium" | "small";
+  /** 非活性状態。フォーカスは維持されるが操作はできない */
+  disabled?: boolean;
+  /**
+   * ローディング状態。Spinner を表示しクリックをブロックする。
+   * @default false
+   */
+  isLoading?: boolean;
+  /** ラベル左側に表示するアイコン。`rightIcon` と排他 */
+  leftIcon?: ReactElement;
+  /** ラベル右側に表示するアイコン。`leftIcon` と排他 */
+  rightIcon?: ReactElement;
+  /** クリック時のコールバック */
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+};
 
 function Spinner() {
   return (
