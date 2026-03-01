@@ -18,7 +18,7 @@ const StyledControl = styled(ArkCheckbox.Control, checkboxControlRecipe);
 const StyledLabel = styled(ArkCheckbox.Label, checkboxLabelRecipe);
 const StyledHelperText = styled(Field.HelperText, checkboxHelperTextRecipe);
 
-export interface CheckboxProps {
+export type CheckboxProps = {
   label: string;
   helperText?: string;
   checked?: CheckedState;
@@ -27,7 +27,7 @@ export interface CheckboxProps {
   disabled?: boolean;
   name?: string;
   value?: string;
-}
+};
 
 function CheckIcon() {
   return (
