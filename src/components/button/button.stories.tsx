@@ -12,6 +12,37 @@ const meta = preview.meta({
       page: ButtonDocsPage,
     },
   },
+  argTypes: {
+    children: {
+      description: "ボタンのラベル",
+    },
+    styleType: {
+      description: "ボタンのスタイルバリアント",
+      table: { defaultValue: { summary: '"filled"' } },
+    },
+    size: {
+      description: "ボタンのサイズ",
+      table: { defaultValue: { summary: '"medium"' } },
+    },
+    disabled: {
+      description: "非活性状態。フォーカスは維持されるが操作はできない",
+      table: { defaultValue: { summary: "false" } },
+    },
+    isLoading: {
+      description:
+        "ローディング状態。Spinner を表示しクリックをブロックする",
+      table: { defaultValue: { summary: "false" } },
+    },
+    leftIcon: {
+      description: "ラベル左側に表示するアイコン。`rightIcon` と排他",
+    },
+    rightIcon: {
+      description: "ラベル右側に表示するアイコン。`leftIcon` と排他",
+    },
+    onClick: {
+      description: "クリック時のコールバック",
+    },
+  },
   args: {
     children: "ボタン",
     onClick: fn(),
