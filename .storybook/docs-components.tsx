@@ -1,6 +1,7 @@
+import type { ComponentPropsWithoutRef } from "react";
 import { styled } from "@styled/jsx";
 
-export const DocsContainer = styled("div", {
+const DocsContainerBase = styled("div", {
   base: {
     maxWidth: "48rem",
     paddingBlock: "8",
@@ -10,16 +11,28 @@ export const DocsContainer = styled("div", {
   },
 });
 
+export function DocsContainer({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<"div">) {
+  return (
+    <DocsContainerBase
+      {...props}
+      className={`sb-unstyled${className ? ` ${className}` : ""}`}
+    />
+  );
+}
+
 export const DocsTitle = styled("h1", {
-  base: { fontSize: "2xl", fontWeight: "bold", color: "text.primary" },
+  base: { fontSize: "threeExtraLarge", fontWeight: "bold", color: "text.primary" },
 });
 
 export const DocsHeading = styled("h2", {
-  base: { fontSize: "lg", fontWeight: "bold", color: "text.primary" },
+  base: { fontSize: "extraLarge", fontWeight: "bold", color: "text.primary" },
 });
 
 export const DocsCaption = styled("p", {
-  base: { color: "text.secondary", fontSize: "sm" },
+  base: { color: "text.secondary", fontSize: "small" },
 });
 
 export const DocsDivider = styled("hr", {
@@ -33,8 +46,8 @@ export const DocsDivider = styled("hr", {
 export const DocsLabel = styled("span", {
   base: {
     color: "text.secondary",
-    fontSize: "xs",
-    fontWeight: "medium",
+    fontSize: "medium",
+    fontWeight: "regular",
     flexShrink: "0",
   },
 });
@@ -42,8 +55,8 @@ export const DocsLabel = styled("span", {
 export const DocsSizeLabel = styled("span", {
   base: {
     color: "text.secondary",
-    fontSize: "xs",
-    fontWeight: "medium",
+    fontSize: "medium",
+    fontWeight: "regular",
     width: "8",
     textAlign: "right",
     flexShrink: "0",
@@ -63,13 +76,13 @@ export const DocsVariantGroup = styled("div", {
 });
 
 export const DocsText = styled("p", {
-  base: { color: "text.primary", fontSize: "sm", lineHeight: "loose" },
+  base: { color: "text.primary", fontSize: "medium", lineHeight: "loose" },
 });
 
 export const DocsList = styled("ul", {
   base: {
     color: "text.primary",
-    fontSize: "sm",
+    fontSize: "medium",
     lineHeight: "loose",
     paddingInlineStart: "6",
     display: "flex",
@@ -81,7 +94,7 @@ export const DocsList = styled("ul", {
 
 export const DocsTable = styled("table", {
   base: {
-    fontSize: "sm",
+    fontSize: "medium",
     width: "100%",
     borderCollapse: "collapse",
     "& th, & td": {
@@ -101,5 +114,5 @@ export const DocsTable = styled("table", {
 });
 
 export const DocsSubheading = styled("h3", {
-  base: { fontSize: "md", fontWeight: "bold", color: "text.primary" },
+  base: { fontSize: "large", fontWeight: "bold", color: "text.primary" },
 });
