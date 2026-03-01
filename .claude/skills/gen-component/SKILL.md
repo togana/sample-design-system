@@ -10,7 +10,6 @@ $ARGUMENTS の内容に基づいてコンポーネントを生成してくださ
 
 - ヘッドレス UI: Ark UI (`@ark-ui/react`)
 - スタイリング: Panda CSS (`styled-system` から import)
-- デザイン: Pencil (`.pen` ファイル)
 - フレームワーク: React (Server Components 非対応のものは `'use client'` を付ける)
 
 ## ファイル構成
@@ -22,7 +21,6 @@ src/components/{name}/
 ├── index.ts              # re-export
 ├── {name}.tsx            # メインコンポーネント
 ├── {name}.recipe.ts      # Panda CSS レシピ (cva)
-├── {name}.pen            # Pencil デザインファイル
 ├── {name}.docs.tsx       # Storybook Docs ページ（/gen-component-doc で生成）
 ├── {name}.test.tsx       # テスト
 └── {name}.stories.tsx    # Storybook ストーリー
@@ -30,35 +28,6 @@ src/components/{name}/
 
 - `{name}` はケバブケース（例: `button`, `text-field`）
 - `index.ts` はコンポーネントと型を re-export する
-- `.pen` ファイルはコンポーネント設計に使用し、Git にコミットする
-
-## Pencil デザインファイル
-
-- コンポーネントの `.pen` ファイルを `src/components/{name}/` 配下に配置する
-- `.pen` ファイルの内容は Pencil MCP ツールでのみ読み書きする（`Read` / `Grep` ツールは使用不可）
-- `.pen` ファイルにはコンポーネントの全バリアント・状態を設計として含める
-- デザインとコードを同一の PR でレビューできるようにする
-
-### .pen ファイルからのデザイン読み取り
-
-既存の `.pen` ファイルがある場合、要件確認フェーズで Pencil MCP ツール（`batch_get` に `patterns: [{ reusable: true }]`）を使って以下を抽出する:
-
-- 再利用可能なバリアントフレームとその視覚プロパティ（fill, stroke, cornerRadius）
-- サイズごとのオーバーライド（height, padding, gap, fontSize）
-- 状態の表現（disabled の opacity、loading の表現等）
-- テーマ変数（`get_variables` で取得）
-
-### .pen 変数名と Panda CSS トークンの対応
-
-`.pen` ファイルでは `$variable-name` 形式でデザイン変数を参照する。レシピ作成時は以下のルールで Panda CSS トークンに変換する:
-
-| .pen の形式 | Panda CSS の形式 | 例 |
-|---|---|---|
-| `$bg-fill-brand` | `bg.fill.brand` | セマンティックカラー: ハイフンをドットに変換 |
-| `$text-onFill` | `text.onFill` | キャメルケース部分はそのまま |
-| `$border-danger` | `border.danger` | セマンティックカラー: ハイフンをドットに変換 |
-| `$radius-md` | `md`（radii スケール） | プリミティブトークン: スケール名で参照 |
-| `$font-weight-medium` | `medium`（fontWeights スケール） | プリミティブトークン: スケール名で参照 |
 
 ## トークンルール
 
@@ -309,7 +278,6 @@ function Spinner() {
 
 - 対応する ADR があれば読み、MVP スコープを確認する
 - バリアント、サイズ、状態の一覧を確認する
-- 既存の `.pen` ファイルがあれば Pencil MCP ツールで読み取り、デザイン仕様を確認する（「Pencil デザインファイル」セクション参照）
 
 ### 2. トークンの確認・追加
 

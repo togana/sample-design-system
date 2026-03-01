@@ -65,8 +65,7 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 | F1 | `src/components/{name}/` 配下に配置されているか（ケバブケース） | warning |
 | F2 | `index.ts` で re-export されているか | warning |
 | F3 | `'use client'` ディレクティブが必要なコンポーネントに付与されているか | critical |
-| F4 | `.pen` デザインファイルが配置されているか | info |
-| F5 | `.stories.tsx` ストーリーファイルが配置されているか | warning |
+| F4 | `.stories.tsx` ストーリーファイルが配置されているか | warning |
 
 ## 出力形式
 
