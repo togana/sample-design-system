@@ -7,7 +7,7 @@ const DocsContainerBase = styled("div", {
     paddingBlock: "8",
     display: "flex",
     flexDirection: "column",
-    gap: "2",
+    gap: "5",
   },
 });
 
@@ -39,7 +39,7 @@ export const DocsDivider = styled("hr", {
   base: {
     borderBlockStart: "1px solid",
     borderColor: "border",
-    marginBlock: "6",
+    marginBlock: "10",
   },
 });
 
@@ -72,7 +72,7 @@ export const DocsStateRow = styled("div", {
 });
 
 export const DocsVariantGroup = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "4" },
+  base: { display: "flex", flexDirection: "column", gap: "5" },
 });
 
 export const DocsText = styled("p", {
@@ -87,7 +87,7 @@ export const DocsList = styled("ul", {
     paddingInlineStart: "6",
     display: "flex",
     flexDirection: "column",
-    gap: "1",
+    gap: "3",
     listStyleType: "disc",
   },
 });
