@@ -310,6 +310,8 @@ function Spinner() {
 - `play` 関数付きのインタラクションテストを書く（クリック、disabled/loading 時の挙動など）
 - インタラクションテストには `tags: ["!dev"]` を付けてサイドバーから非表示にする
 - Storybook 10 のポータブルストーリーパターンを使う（`Meta`, `StoryObj` は **使わない**）
+- `argTypes` で全 props の `description` を設定する
+- デフォルト値がある props には `table.defaultValue.summary` も設定する
 
 ```tsx
 import { expect, fn, userEvent, within } from "storybook/test";
@@ -324,6 +326,19 @@ const meta = preview.meta({
   parameters: {
     docs: {
       page: MyComponentDocsPage,
+    },
+  },
+  argTypes: {
+    children: {
+      description: "ボタンのラベル",
+    },
+    disabled: {
+      description: "非活性状態",
+      table: { defaultValue: { summary: "false" } },
+    },
+    variant: {
+      description: "スタイルバリアント",
+      table: { defaultValue: { summary: '"solid"' } },
     },
   },
   args: { onClick: fn() },
