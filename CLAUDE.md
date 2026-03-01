@@ -29,6 +29,11 @@
 - `style` prop による直接スタイル指定は禁止 → `styled` ファクトリの props で指定する
 - パターンコンポーネント（`Box`, `Flex`, `Stack` 等）は使わない
 
+### コンポーネント Props 型
+
+- Props 型は `type` で明示的に定義する（`interface` は使わない）
+- `ComponentProps<typeof Styled...>` からの `Omit` / 継承はしない — 全 props を自前で列挙する
+
 ## Storybook
 
 ### stories と docs の役割分担

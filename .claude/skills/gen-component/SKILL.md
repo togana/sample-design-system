@@ -167,20 +167,30 @@ const BaseButton = styled(ark.button, buttonRecipe);
 ```tsx
 "use client";
 
-import type { ComponentProps, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { styled } from "../../../styled-system/jsx";
 import { buttonRecipe } from "./button.recipe";
 
 const StyledButton = styled("button", buttonRecipe);
 
-export type ButtonProps = ComponentProps<typeof StyledButton> & {
-  // コンポーネント固有の props
+// Props は明示的に type で定義する（ComponentProps からの Omit/継承はしない）
+export type ButtonProps = {
+  /** ボタンのラベル */
+  children: ReactNode;
+  /**
+   * スタイルバリアント。
+   * @default "solid"
+   */
+  variant?: "solid" | "outline";
+  // ... 他の props
 };
 
 export function Button(props: ButtonProps) {
-  const { ref, variant, size, ...rest } = props;
+  const { children, variant, ...rest } = props;
   return (
-    <StyledButton ref={ref} variant={variant} size={size} {...rest} />
+    <StyledButton variant={variant} {...rest}>
+      {children}
+    </StyledButton>
   );
 }
 ```
