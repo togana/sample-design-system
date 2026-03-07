@@ -17,7 +17,7 @@ const disabledCheckedStyles = {
 } as const;
 
 export const checkboxRecipe = sva({
-  slots: ["field", "root", "control", "label", "helperText"],
+  slots: ["field", "root", "control", "label", "helperText", "errorText"],
   base: {
     field: {
       display: "inline-flex",
@@ -92,6 +92,12 @@ export const checkboxRecipe = sva({
       _disabled: {
         color: "disabled.onSurface",
       },
+    },
+    errorText: {
+      textStyle: "body.small",
+      color: "negative",
+      marginInlineStart: "7",
+      paddingInlineStart: "extraSmall",
     },
   },
 });

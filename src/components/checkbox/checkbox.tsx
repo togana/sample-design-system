@@ -13,6 +13,7 @@ const StyledRoot = withContext(ArkCheckbox.Root, "root");
 const StyledControl = withContext(ArkCheckbox.Control, "control");
 const StyledLabel = withContext(ArkCheckbox.Label, "label");
 const StyledHelperText = withContext(Field.HelperText, "helperText");
+const StyledErrorText = withContext(Field.ErrorText, "errorText");
 
 export type CheckboxProps = {
   label: string;
@@ -21,6 +22,8 @@ export type CheckboxProps = {
   defaultChecked?: CheckedState;
   onCheckedChange?: (details: CheckedChangeDetails) => void;
   disabled?: boolean;
+  invalid?: boolean;
+  errorText?: string;
   name?: string;
   value?: string;
 };
@@ -69,14 +72,25 @@ export function Checkbox(props: CheckboxProps) {
     label,
     helperText,
     disabled = false,
+    invalid = false,
+    errorText,
     value = "on",
     ...rootProps
   } = props;
 
+  // disabled 時はエラー表示しない（操作できない状態でエラーを示すのは不適切）
+  const isInvalid = invalid && !disabled;
+  const showError = isInvalid && !!errorText;
+
   return (
     // Field.Root の disabled はネイティブ disabled を hidden input に付与しフォーカスを喪失させるため、
     // readOnly で操作を無効化し data-disabled を手動伝播する（ADR-008 参照）
-    <StyledField data-disabled={disabled || undefined}>
+    // Field.Root の invalid は data-invalid を子パーツに自動伝播し、
+    // Field.ErrorText の id / aria-describedby 連携も自動管理する
+    <StyledField
+      invalid={isInvalid}
+      data-disabled={disabled || undefined}
+    >
       <StyledRoot
         readOnly={disabled || undefined}
         data-disabled={disabled || undefined}
@@ -100,6 +114,9 @@ export function Checkbox(props: CheckboxProps) {
         <StyledHelperText data-disabled={disabled || undefined}>
           {helperText}
         </StyledHelperText>
+      )}
+      {showError && (
+        <StyledErrorText>{errorText}</StyledErrorText>
       )}
     </StyledField>
   );

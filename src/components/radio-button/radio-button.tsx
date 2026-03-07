@@ -20,6 +20,7 @@ const StyledItemText = withContext(ArkRadioGroup.ItemText, "itemText");
 const StyledItemGroup = withContext(styled("div"), "itemGroup");
 const StyledHelperText = withContext(styled("p"), "helperText");
 const StyledItemHelperText = withContext(styled("p"), "itemHelperText");
+const StyledErrorText = withContext(styled("p"), "errorText");
 
 export type RadioGroupProps = {
   label: string;
@@ -28,6 +29,8 @@ export type RadioGroupProps = {
   defaultValue?: string;
   onValueChange?: (details: RadioGroupValueChangeDetails) => void;
   disabled?: boolean;
+  invalid?: boolean;
+  errorText?: string;
   name?: string;
   orientation?: "vertical" | "horizontal";
   children: React.ReactNode;
@@ -45,20 +48,29 @@ export function RadioGroup(props: RadioGroupProps) {
     label,
     helperText,
     disabled = false,
+    invalid = false,
+    errorText,
     orientation = "vertical",
     children,
     ...rootProps
   } = props;
 
   const helperTextId = useId();
+  const errorTextId = useId();
+
+  // disabled 時はエラー表示しない（操作できない状態でエラーを示すのは不適切）
+  const isInvalid = invalid && !disabled;
+  const showError = isInvalid && !!errorText;
 
   return (
     // RadioGroup は readOnly 時にフォーカスリングが出ないため、
     // Checkbox と異なり Ark UI の disabled をそのまま使用する
     <StyledRoot
       disabled={disabled}
+      invalid={isInvalid}
       orientation={orientation}
       aria-describedby={helperText ? helperTextId : undefined}
+      aria-errormessage={showError ? errorTextId : undefined}
       {...rootProps}
     >
       <StyledLabel>{label}</StyledLabel>
@@ -66,6 +78,11 @@ export function RadioGroup(props: RadioGroupProps) {
         <StyledHelperText id={helperTextId}>
           {helperText}
         </StyledHelperText>
+      )}
+      {showError && (
+        <StyledErrorText id={errorTextId} role="alert">
+          {errorText}
+        </StyledErrorText>
       )}
       <StyledItemGroup data-orientation={orientation}>
         {children}

@@ -26,6 +26,7 @@ export const radioButtonRecipe = sva({
     "itemText",
     "helperText",
     "itemHelperText",
+    "errorText",
   ],
   base: {
     root: {
@@ -109,6 +110,9 @@ export const radioButtonRecipe = sva({
           },
         },
       },
+      _invalid: {
+        borderColor: "negative",
+      },
     },
     itemText: labelStyles,
     helperText: helperTextStyles,
@@ -116,6 +120,10 @@ export const radioButtonRecipe = sva({
       ...helperTextStyles,
       marginInlineStart: "7",
       paddingInlineStart: "extraSmall",
+    },
+    errorText: {
+      textStyle: "body.small",
+      color: "negative",
     },
   },
 });
