@@ -6,6 +6,7 @@ import { defineTokens } from "@pandacss/dev";
  * @see https://serendie.design/foundations/color/
  */
 export const colors = defineTokens.colors({
+  transparent: { value: "transparent" },
   white: { value: "#FFFFFF" },
   black: { value: "#000000" },
 

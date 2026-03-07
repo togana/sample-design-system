@@ -31,8 +31,8 @@ export const checkboxControlRecipe = cva({
     borderWidth: "thick",
     borderStyle: "solid",
     borderColor: "outline",
-    backgroundColor: "[transparent]",
-    color: "[transparent]",
+    backgroundColor: "transparent",
+    color: "transparent",
     flexShrink: 0,
     position: "relative",
     overflow: "hidden",
@@ -76,7 +76,7 @@ export const checkboxControlRecipe = cva({
     _disabled: {
       backgroundColor: "disabled",
       borderColor: "disabled.onSurface",
-      color: "[transparent]",
+      color: "transparent",
       _checked: {
         borderWidth: "[0]",
         color: "disabled.onSurface",
