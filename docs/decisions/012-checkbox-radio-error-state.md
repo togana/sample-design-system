@@ -88,7 +88,7 @@ RadioButtonItem にはエラー関連の props を追加しない。エラーは
 |--------|------|
 | ItemControl（unchecked） | ボーダー色が `outline` → `negative` に変化 |
 | ItemControl（checked） | 変化なし（`primary` ボーダー・内円のまま） |
-| ErrorMessage | `negative` 色のテキストを GroupLabel の直下（HelperText の下）に表示 |
+| ErrorMessage | `negative` 色のテキストを ItemGroup の下に表示 |
 
 #### ErrorMessage のスタイル
 
@@ -225,7 +225,6 @@ errorText: {
 +-----------------------------------------+  <- RadioGroup.Root
 |  Group Label                            |  <- RadioGroup.Label
 |  Group Helper text (optional)           |  <- HelperText
-|  Error message                          |  <- ErrorMessage (invalid 時のみ)
 |                                         |
 |  +-----------------------------------+  |
 |  | (○)  Label text                   |  |  <- RadioGroup.Item
@@ -233,6 +232,8 @@ errorText: {
 |  +-----------------------------------+  |
 |  | (○)  Label text                   |  |
 |  +-----------------------------------+  |
+|                                         |
+|  Error message                          |  <- ErrorMessage (invalid 時のみ)
 +-----------------------------------------+
 ```
 

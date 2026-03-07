@@ -79,14 +79,14 @@ export function RadioGroup(props: RadioGroupProps) {
           {helperText}
         </StyledHelperText>
       )}
+      <StyledItemGroup data-orientation={orientation}>
+        {children}
+      </StyledItemGroup>
       {showError && (
         <StyledErrorText id={errorTextId} role="alert">
           {errorText}
         </StyledErrorText>
       )}
-      <StyledItemGroup data-orientation={orientation}>
-        {children}
-      </StyledItemGroup>
     </StyledRoot>
   );
 }
