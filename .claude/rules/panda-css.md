@@ -22,10 +22,10 @@
 
 ```tsx
 // NG: 型エラー
-css({ fontSize: "123px" })
+styled("p", { base: { fontSize: "123px" } })
 
 // OK: エスケープハッチ
-css({ fontSize: "[123px]" })
+styled("p", { base: { fontSize: "[123px]" } })
 ```
 
 ## スタイリング手法
