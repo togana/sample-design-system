@@ -49,3 +49,7 @@ styled-system-studio
 
 ## Storybook
 storybook-static
+
+## Playwright
+/test-results/
+/playwright-report/
