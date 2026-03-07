@@ -248,7 +248,18 @@ src/components/checkbox/
 - `data-disabled` による disabled 状態の伝達
 - キーボード操作（Space キーでトグル）
 - **`aria-describedby` の自動連携**: Field.HelperText が hidden input に自動で紐付けられ、スクリーンリーダーが補足情報を読み上げる
-- **`disabled` の自動伝播**: Field.Root からコンテキスト経由で伝播
+
+#### disabled の実装: `readOnly` + 手動 `data-disabled` 方式
+
+Button（ADR-007）と同様に、ネイティブの `disabled` ではなくフォーカス可能性を維持する方式を採用する。
+
+Field.Root の `disabled` prop は内部で hidden input にネイティブ `disabled` 属性を付与するため、チェックボックスがフォーカスを受け付けなくなる。キーボードユーザーやスクリーンリーダーユーザーがチェックボックスの存在を認識できなくなるため、これを回避する。
+
+- Checkbox.Root に `readOnly` を渡してクリック操作を無効化する
+- `data-disabled` を各パーツに手動で付与し、Panda CSS の `_disabled` condition でスタイルを適用する
+- HiddenInput に `aria-disabled` を付与して支援技術に非活性状態を伝達する
+
+Field.Root の `disabled` prop による自動伝播は使用しない。
 
 ### リスク
 
@@ -269,3 +280,4 @@ src/components/checkbox/
 | バリアント | なし（状態のみ） | Serendie の CheckBox にバリアント概念がないため |
 | サイズ | 単一サイズ（20px） | Serendie の仕様に準拠。サイズバリアントの需要が出てきた場合は別途 ADR で追加 |
 | スタイリング | `styled()` ラップ方式 | Button と同じパターンを踏襲し、コードベースの一貫性を保つ |
+| disabled 方式 | `readOnly` + 手動 `data-disabled` | Field.Root の `disabled` は hidden input にネイティブ `disabled` を付与しフォーカスを喪失させるため、`readOnly` で操作を無効化し `data-disabled` を手動伝播する |

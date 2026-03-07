@@ -12,6 +12,7 @@
 - `onClick` ハンドラ内で `aria-disabled` を検査し、`true` の場合は `preventDefault` + early return する
 - `data-disabled` 属性も連動して付与する（conditions の `_disabled` が参照するため）
 - hover / active の conditions は `not([data-disabled])` でガードされている
+- Ark UI 使用時: Field.Root / Ark コンポーネントの `disabled` prop はネイティブ `disabled` を内部で付与しフォーカスを喪失させるため使わない。`readOnly` + 手動 `data-disabled` で代替する
 
 ## loading の実装方式
 
@@ -23,8 +24,8 @@
 - ネイティブ HTML 要素で十分なコンポーネント（Button 等）は Ark UI を使わない
 - 複雑な状態管理が必要なコンポーネント（Checkbox 等）は Ark UI を使う
 - Ark UI 使用時は Field コンポーネントを外殻として配置する（公式推奨パターン）
-  - disabled の伝播: Field.Root → コンテキスト経由で子に自動伝播
   - `aria-describedby` の自動連携: Field.HelperText が自動で紐付け
+  - **disabled には Field.Root の `disabled` prop を使わない** — hidden input にネイティブ `disabled` が付与されフォーカスを喪失するため。代わりに Ark UI コンポーネントの `readOnly` で操作を無効化し、`data-disabled` を各パーツに手動伝播する（ADR-008 参照）
 
 ## スタイリング方式
 

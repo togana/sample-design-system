@@ -74,6 +74,8 @@ export function Checkbox(props: CheckboxProps) {
   } = props;
 
   return (
+    // Field.Root の disabled はネイティブ disabled を hidden input に付与しフォーカスを喪失させるため、
+    // readOnly で操作を無効化し data-disabled を手動伝播する（ADR-008 参照）
     <StyledField data-disabled={disabled || undefined}>
       <StyledRoot
         readOnly={disabled || undefined}
