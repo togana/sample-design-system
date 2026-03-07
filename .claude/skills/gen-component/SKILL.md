@@ -21,9 +21,10 @@ src/components/{name}/
 ├── index.ts              # re-export
 ├── {name}.tsx            # メインコンポーネント
 ├── {name}.recipe.ts      # Panda CSS レシピ (cva)
-├── {name}.docs.tsx       # Storybook Docs ページ（/gen-component-doc で生成）
-├── {name}.test.tsx       # テスト
-└── {name}.stories.tsx    # Storybook ストーリー
+├── {name}.docs.tsx           # Storybook Docs ページ（/gen-component-doc で生成）
+├── {name}.vrt.stories.tsx   # VRT 専用ストーリー（/gen-component-doc で生成）
+├── {name}.test.tsx           # テスト
+└── {name}.stories.tsx        # Storybook ストーリー
 ```
 
 - `{name}` はケバブケース（例: `button`, `text-field`）
@@ -370,11 +371,14 @@ export const ClickInteraction = meta.story({
 });
 ```
 
-### 7. Docs ページの生成
+### 7. Docs ページ・VRT ストーリーの生成
 
-ストーリー作成後、`/gen-component-doc` スキルを実行してカスタム Docs ページ（`{name}.docs.tsx`）を生成する。
+ストーリー作成後、`/gen-component-doc` スキルを実行して以下を生成する:
 
-docs.tsx は全バリアント・サイズ・状態のビジュアルショーケース、Do/Don't、アクセシビリティ情報を含む。stories.tsx の `parameters.docs.page` で Docs タブに接続する。
+- `{name}.docs.tsx` — カスタム Docs ページ（ビジュアルショーケース、Do/Don't、アクセシビリティ情報）
+- `{name}.vrt.stories.tsx` — VRT 専用ストーリー（props のバリアント別に静的な描画のみ）
+
+stories.tsx の `parameters.docs.page` で Docs タブに接続する。
 
 ### 8. 検証
 
@@ -385,6 +389,7 @@ npx panda codegen
 npx tsc --noEmit
 npm run build-storybook
 npm run test-storybook
+npm run test:vrt:update  # VRT ベースラインを生成
 ```
 
 ### 9. 品質監査

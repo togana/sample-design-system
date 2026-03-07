@@ -66,6 +66,8 @@ $ARGUMENTS で指定されたコンポーネントを監査してください。
 | F2 | `index.ts` で re-export されているか | warning |
 | F3 | `'use client'` ディレクティブが必要なコンポーネントに付与されているか | critical |
 | F4 | `.stories.tsx` ストーリーファイルが配置されているか | warning |
+| F5 | `.vrt.stories.tsx` VRT 専用ストーリーが配置されているか | warning |
+| F6 | VRT ベースライン画像（`e2e/vrt/__screenshots__/`）がストーリーと整合しているか（ストーリー追加後にベースライン未生成でないか） | warning |
 
 ## 出力形式
 
