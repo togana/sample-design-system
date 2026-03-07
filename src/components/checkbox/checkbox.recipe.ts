@@ -52,7 +52,7 @@ export const checkboxRecipe = sva({
       focusRingColor: "primary",
       focusRingWidth: "thick",
       focusRingOffset: "2",
-      // hover overlay
+      // ::after オーバーレイ（hover 表現用）
       _after: {
         content: '""',
         position: "absolute",

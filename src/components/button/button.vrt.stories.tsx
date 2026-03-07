@@ -103,3 +103,11 @@ export const FilledLoading = meta.story({
 export const OutlinedLoading = meta.story({
   args: { styleType: "outlined", isLoading: true },
 });
+
+export const GhostLoading = meta.story({
+  args: { styleType: "ghost", isLoading: true },
+});
+
+export const RectangleLoading = meta.story({
+  args: { styleType: "rectangle", isLoading: true },
+});
