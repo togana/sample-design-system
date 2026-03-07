@@ -56,9 +56,9 @@
 ### テスト
 
 - Storybook のインタラクションテスト（`play` 関数）は Vitest で実行する
-- `npm run test-storybook` でインタラクションテストを実行
+- `npm run test:storybook` でインタラクションテストを実行
 - `npm run storybook` で開発サーバー起動、`npm run build-storybook` でビルド
-- `npm run npm run test:vrt` でビジュアルリグレッションテストを実行
+- `npm run test:vrt` でビジュアルリグレッションテストを実行
 - `npm run test:vrt:update` でベースラインを更新
 - VRT のベースライン画像（`e2e/vrt/__screenshots__/`）は git にコミットする
 

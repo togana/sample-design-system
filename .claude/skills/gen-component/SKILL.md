@@ -388,7 +388,7 @@ stories.tsx の `parameters.docs.page` で Docs タブに接続する。
 npx panda codegen
 npx tsc --noEmit
 npm run build-storybook
-npm run test-storybook
+npm run test:storybook
 npm run test:vrt:update  # VRT ベースラインを生成
 ```
 
