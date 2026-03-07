@@ -56,8 +56,8 @@ test.describe("Visual Regression Tests", () => {
         }, colorMode);
         await page.waitForTimeout(500);
 
-        // ストーリー名に "Focus" を含む場合、Tab でフォーカスを当てて focus-visible 状態を撮影
-        if (story.name.includes("Focus")) {
+        // ストーリー名が "Focus" で終わる場合、Tab でフォーカスを当てて focus-visible 状態を撮影
+        if (story.name.endsWith("Focus")) {
           await page.keyboard.press("Tab");
         }
 

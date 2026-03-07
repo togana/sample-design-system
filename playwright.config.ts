@@ -6,8 +6,8 @@ export default defineConfig({
     "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
 
   retries: process.env.CI ? 0 : 1,
-  fullyParallel: false,
-  workers: 1,
+  fullyParallel: !process.env.CI,
+  workers: process.env.CI ? 1 : 2,
 
   reporter: [
     [process.env.CI ? "github" : "list"],
