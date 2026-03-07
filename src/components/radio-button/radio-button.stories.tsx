@@ -32,6 +32,15 @@ const meta = preview.meta({
       description: "グループ全体の非活性状態",
       table: { defaultValue: { summary: "false" } },
     },
+    invalid: {
+      description:
+        "エラー状態。コントロールのボーダー色が変化する。disabled 時はエラー表示が抑制される",
+      table: { defaultValue: { summary: "false" } },
+    },
+    errorText: {
+      description:
+        "エラーメッセージ。invalid が true のときのみ表示される",
+    },
     name: {
       description: "フォーム送信時のフィールド名",
     },
@@ -117,5 +126,35 @@ export const KeyboardNavigation = meta.story({
     await userEvent.keyboard("{ArrowDown}");
     const smsRadio = canvas.getByRole("radio", { name: "SMS" });
     await expect(smsRadio).toBeChecked();
+  },
+});
+
+export const InvalidShowsErrorText = meta.story({
+  name: "Invalid Shows Error Text",
+  tags: ["!dev"],
+  args: { invalid: true, errorText: "いずれかを選択してください" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText("いずれかを選択してください"),
+    ).toBeInTheDocument();
+    const group = canvas.getByRole("radiogroup");
+    await expect(group).toHaveAttribute("data-invalid");
+  },
+});
+
+export const DisabledInvalidSuppressed = meta.story({
+  name: "Disabled Invalid Suppressed",
+  tags: ["!dev"],
+  args: {
+    disabled: true,
+    invalid: true,
+    errorText: "いずれかを選択してください",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.queryByText("いずれかを選択してください"),
+    ).not.toBeInTheDocument();
   },
 });

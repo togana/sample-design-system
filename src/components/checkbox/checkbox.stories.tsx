@@ -34,6 +34,15 @@ const meta = preview.meta({
       description: "非活性状態。フォーカスは維持されるが操作はできない",
       table: { defaultValue: { summary: "false" } },
     },
+    invalid: {
+      description:
+        "エラー状態。コントロールのボーダー色が変化する。disabled 時はエラー表示が抑制される",
+      table: { defaultValue: { summary: "false" } },
+    },
+    errorText: {
+      description:
+        "エラーメッセージ。invalid が true のときのみ表示される",
+    },
     name: {
       description: "フォーム送信時のフィールド名",
     },
@@ -87,5 +96,32 @@ export const IndeterminateState = meta.story({
   play: async ({ canvasElement }) => {
     const control = canvasElement.querySelector("[data-state=indeterminate]");
     await expect(control).not.toBeNull();
+  },
+});
+
+export const InvalidShowsErrorText = meta.story({
+  name: "Invalid Shows Error Text",
+  tags: ["!dev"],
+  args: { label: "同意する", invalid: true, errorText: "同意が必要です" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText("同意が必要です")).toBeInTheDocument();
+    const checkbox = canvas.getByRole("checkbox", { name: "同意する" });
+    await expect(checkbox).toHaveAttribute("aria-invalid", "true");
+  },
+});
+
+export const DisabledInvalidSuppressed = meta.story({
+  name: "Disabled Invalid Suppressed",
+  tags: ["!dev"],
+  args: {
+    label: "同意する",
+    disabled: true,
+    invalid: true,
+    errorText: "同意が必要です",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText("同意が必要です")).not.toBeInTheDocument();
   },
 });

@@ -29,7 +29,7 @@ export function RadioButtonDocsPage() {
         複数の選択肢から 1 つを排他的に選択するためのフォーム要素。RadioGroup でグループ化し、RadioButtonItem で個別の選択肢を表現する。
       </DocsText>
       <DocsCaption>
-        状態: unchecked / checked / disabled | 配置: vertical / horizontal
+        状態: unchecked / checked / disabled / invalid | 配置: vertical / horizontal
       </DocsCaption>
 
       <DocsDivider />
@@ -91,6 +91,27 @@ export function RadioButtonDocsPage() {
             <RadioButtonItem label="SMS" value="sms" disabled />
           </RadioGroup>
         </DocsStateRow>
+        <DocsStateRow>
+          <DocsLabel>Invalid</DocsLabel>
+          <RadioGroup label="通知方法" invalid>
+            <RadioButtonItem label="メール" value="email" />
+            <RadioButtonItem label="SMS" value="sms" />
+          </RadioGroup>
+        </DocsStateRow>
+        <DocsStateRow>
+          <DocsLabel>Invalid + Checked</DocsLabel>
+          <RadioGroup label="通知方法" invalid defaultValue="email">
+            <RadioButtonItem label="メール" value="email" />
+            <RadioButtonItem label="SMS" value="sms" />
+          </RadioGroup>
+        </DocsStateRow>
+        <DocsStateRow>
+          <DocsLabel>Disabled + Invalid</DocsLabel>
+          <RadioGroup label="通知方法" disabled invalid>
+            <RadioButtonItem label="メール" value="email" />
+            <RadioButtonItem label="SMS" value="sms" />
+          </RadioGroup>
+        </DocsStateRow>
       </DocsVariantGroup>
 
       <DocsDivider />
@@ -143,6 +164,42 @@ export function RadioButtonDocsPage() {
             <RadioButtonItem label="プッシュ通知" value="push" />
           </RadioGroup>
         </DocsStateRow>
+      </ExampleGroup>
+
+      <DocsDivider />
+
+      {/* エラー状態 */}
+      <DocsHeading>エラー状態</DocsHeading>
+      <DocsText>
+        invalid を指定するとコントロールにエラースタイルが適用される。errorText を併用するとエラーメッセージを表示できる。disabled 時はエラー表示が抑制される。
+      </DocsText>
+      <ExampleGroup>
+        <RadioGroup
+          label="通知方法"
+          invalid
+          errorText="いずれかを選択してください"
+        >
+          <RadioButtonItem label="メール" value="email" />
+          <RadioButtonItem label="SMS" value="sms" />
+        </RadioGroup>
+        <RadioGroup
+          label="配送方法"
+          helperText="お届け日の目安は選択後に表示されます"
+          invalid
+          errorText="配送方法を選択してください"
+        >
+          <RadioButtonItem label="通常配送" value="standard" />
+          <RadioButtonItem label="速達" value="express" />
+        </RadioGroup>
+        <RadioGroup
+          label="通知方法（無効）"
+          disabled
+          invalid
+          errorText="このエラーは表示されない"
+        >
+          <RadioButtonItem label="メール" value="email" />
+          <RadioButtonItem label="SMS" value="sms" />
+        </RadioGroup>
       </ExampleGroup>
 
       <DocsDivider />
@@ -247,6 +304,16 @@ export function RadioButtonDocsPage() {
             <td>aria-disabled</td>
             <td>disabled 時</td>
             <td>操作不可であることを支援技術に伝える（フォーカスは維持される）</td>
+          </tr>
+          <tr>
+            <td>aria-invalid</td>
+            <td>invalid 時</td>
+            <td>Ark UI の invalid prop により RadioGroup.Root に自動付与される</td>
+          </tr>
+          <tr>
+            <td>aria-errormessage</td>
+            <td>errorText 指定時</td>
+            <td>ErrorMessage 要素の id を参照し、エラーメッセージを紐付ける</td>
           </tr>
           <tr>
             <td>data-state</td>

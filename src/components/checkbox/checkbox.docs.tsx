@@ -29,7 +29,7 @@ export function CheckboxDocsPage() {
         ユーザーが 1 つ以上の選択肢をオン・オフするためのフォーム要素。設定の切り替え、利用規約への同意、複数項目の一括選択などに使用する。
       </DocsText>
       <DocsCaption>
-        状態: unchecked / checked / indeterminate / disabled
+        状態: unchecked / checked / indeterminate / disabled / invalid
       </DocsCaption>
 
       <DocsDivider />
@@ -80,6 +80,18 @@ export function CheckboxDocsPage() {
           <DocsLabel>Disabled + Indeterminate</DocsLabel>
           <Checkbox label="無効（一部選択）" disabled defaultChecked="indeterminate" />
         </DocsStateRow>
+        <DocsStateRow>
+          <DocsLabel>Invalid</DocsLabel>
+          <Checkbox label="未選択（エラー）" invalid />
+        </DocsStateRow>
+        <DocsStateRow>
+          <DocsLabel>Invalid + Checked</DocsLabel>
+          <Checkbox label="選択済み（エラー）" invalid defaultChecked />
+        </DocsStateRow>
+        <DocsStateRow>
+          <DocsLabel>Disabled + Invalid</DocsLabel>
+          <Checkbox label="無効（エラー無視）" disabled invalid />
+        </DocsStateRow>
       </DocsVariantGroup>
 
       <DocsDivider />
@@ -102,6 +114,33 @@ export function CheckboxDocsPage() {
           label="無効な項目"
           helperText="この設定は現在変更できません"
           disabled
+        />
+      </HelperTextGroup>
+
+      <DocsDivider />
+
+      {/* エラー状態 */}
+      <DocsHeading>エラー状態</DocsHeading>
+      <DocsText>
+        invalid を指定するとコントロールにエラースタイルが適用される。errorText を併用するとエラーメッセージを表示できる。disabled 時はエラー表示が抑制される。
+      </DocsText>
+      <HelperTextGroup>
+        <Checkbox
+          label="利用規約に同意する"
+          invalid
+          errorText="同意が必要です"
+        />
+        <Checkbox
+          label="メール通知を受け取る"
+          helperText="新着情報やアップデートをメールでお届けします"
+          invalid
+          errorText="選択してください"
+        />
+        <Checkbox
+          label="無効な項目（エラー無視）"
+          disabled
+          invalid
+          errorText="このエラーは表示されない"
         />
       </HelperTextGroup>
 
@@ -199,6 +238,16 @@ export function CheckboxDocsPage() {
             <td>aria-disabled</td>
             <td>disabled 時</td>
             <td>操作不可であることを支援技術に伝える（フォーカスは維持される）</td>
+          </tr>
+          <tr>
+            <td>aria-invalid</td>
+            <td>invalid 時</td>
+            <td>Field.Root の invalid prop により自動付与される</td>
+          </tr>
+          <tr>
+            <td>aria-describedby</td>
+            <td>errorText 指定時</td>
+            <td>Field.ErrorText が自動で HiddenInput と紐付ける</td>
           </tr>
           <tr>
             <td>data-state</td>

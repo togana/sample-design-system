@@ -69,3 +69,29 @@ export const WithHelperText = meta.story({
 export const CheckedWithHelperText = meta.story({
   args: { checked: true, helperText: "補足テキスト" },
 });
+
+// --- invalid ---
+
+export const Invalid = meta.story({
+  args: { invalid: true },
+});
+
+export const InvalidChecked = meta.story({
+  args: { checked: true, invalid: true },
+});
+
+export const InvalidWithErrorText = meta.story({
+  args: { invalid: true, errorText: "同意が必要です" },
+});
+
+export const InvalidWithHelperAndErrorText = meta.story({
+  args: {
+    helperText: "補足テキスト",
+    invalid: true,
+    errorText: "同意が必要です",
+  },
+});
+
+export const InvalidDisabled = meta.story({
+  args: { invalid: true, errorText: "このエラーは表示されない", disabled: true },
+});

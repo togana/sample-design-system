@@ -77,3 +77,29 @@ export const ItemDisabled = meta.story({
     ),
   },
 });
+
+// --- invalid ---
+
+export const Invalid = meta.story({
+  args: { invalid: true },
+});
+
+export const InvalidChecked = meta.story({
+  args: { defaultValue: "email", invalid: true },
+});
+
+export const InvalidWithErrorText = meta.story({
+  args: { invalid: true, errorText: "いずれかを選択してください" },
+});
+
+export const InvalidWithHelperAndErrorText = meta.story({
+  args: {
+    helperText: "通知を受け取る方法を選択してください",
+    invalid: true,
+    errorText: "いずれかを選択してください",
+  },
+});
+
+export const InvalidDisabled = meta.story({
+  args: { disabled: true, invalid: true, errorText: "このエラーは表示されない" },
+});
