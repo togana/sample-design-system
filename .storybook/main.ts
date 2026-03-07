@@ -25,4 +25,18 @@ export default defineMain({
   features: {
     experimentalComponentsManifest: true,
   },
+  // Storybook ビルド時の無害な Vite/Rollup 警告を抑制する
+  viteFinal(config) {
+    config.build ??= {};
+    // Storybook の iframe バンドルは単一チャンクが大きくなるため閾値を引き上げ
+    config.build.chunkSizeWarningLimit = 3000;
+    config.build.rollupOptions ??= {};
+    config.build.rollupOptions.onwarn = (warning, defaultHandler) => {
+      // "use client" ディレクティブは Storybook（クライアント専用）では不要
+      if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
+      if (warning.code === "SOURCEMAP_ERROR") return;
+      defaultHandler(warning);
+    };
+    return config;
+  },
 });
