@@ -11,9 +11,13 @@ type IconProps =
   | { leftIcon?: ReactElement; rightIcon?: never }
   | { leftIcon?: never; rightIcon?: ReactElement };
 
-export type ButtonProps = IconProps & {
-  /** ボタンのラベル */
-  children: ReactNode;
+// children がない場合（icon-only）は aria-label を必須にする
+type LabelProps =
+  | { children: ReactNode; "aria-label"?: string }
+  | { children?: never; "aria-label": string };
+
+export type ButtonProps = IconProps &
+  LabelProps & {
   /**
    * ボタンのスタイルバリアント。
    * @default "filled"

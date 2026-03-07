@@ -93,6 +93,7 @@ export function Checkbox(props: CheckboxProps) {
     >
       <StyledRoot
         readOnly={disabled || undefined}
+        aria-disabled={disabled || undefined}
         data-disabled={disabled || undefined}
         value={value}
         {...rootProps}

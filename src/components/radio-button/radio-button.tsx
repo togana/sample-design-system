@@ -1,14 +1,15 @@
 "use client";
 
-import { useId } from "react";
+import { createContext, useContext, useId } from "react";
 import {
   RadioGroup as ArkRadioGroup,
-  useRadioGroupContext,
   type RadioGroupValueChangeDetails,
 } from "@ark-ui/react/radio-group";
 import { createStyleContext } from "@styled/jsx/create-style-context";
 import { styled } from "@styled/jsx";
 import { radioButtonRecipe } from "./radio-button.recipe";
+
+const GroupDisabledContext = createContext(false);
 
 const { withProvider, withContext } = createStyleContext(radioButtonRecipe);
 
@@ -62,26 +63,37 @@ export function RadioGroup(props: RadioGroupProps) {
   const isInvalid = invalid && !disabled;
   const showError = isInvalid && !!errorText;
 
+  const describedBy =
+    [helperText ? helperTextId : null, showError ? errorTextId : null]
+      .filter(Boolean)
+      .join(" ") || undefined;
+
   return (
-    // RadioGroup は readOnly 時にフォーカスリングが出ないため、
-    // Checkbox と異なり Ark UI の disabled をそのまま使用する
+    // Field.Root と同様に readOnly で操作を無効化し、aria-disabled + data-disabled を手動伝播する
+    // Ark UI の disabled はネイティブ disabled を hidden input に付与しフォーカスを喪失させるため使わない
     <StyledRoot
-      disabled={disabled}
+      readOnly={disabled || undefined}
+      aria-disabled={disabled || undefined}
+      data-disabled={disabled || undefined}
       invalid={isInvalid}
       orientation={orientation}
-      aria-describedby={helperText ? helperTextId : undefined}
-      aria-errormessage={showError ? errorTextId : undefined}
+      aria-describedby={describedBy}
       {...rootProps}
     >
-      <StyledLabel>{label}</StyledLabel>
+      <StyledLabel data-disabled={disabled || undefined}>{label}</StyledLabel>
       {helperText && (
-        <StyledHelperText id={helperTextId}>
+        <StyledHelperText
+          id={helperTextId}
+          data-disabled={disabled || undefined}
+        >
           {helperText}
         </StyledHelperText>
       )}
-      <StyledItemGroup data-orientation={orientation}>
-        {children}
-      </StyledItemGroup>
+      <GroupDisabledContext.Provider value={disabled}>
+        <StyledItemGroup data-orientation={orientation}>
+          {children}
+        </StyledItemGroup>
+      </GroupDisabledContext.Provider>
       {showError && (
         <StyledErrorText id={errorTextId} role="alert">
           {errorText}
@@ -93,19 +105,31 @@ export function RadioGroup(props: RadioGroupProps) {
 
 export function RadioButtonItem(props: RadioButtonItemProps) {
   const { label, value, helperText, disabled = false } = props;
-  const groupContext = useRadioGroupContext();
-  const itemState = groupContext.getItemState({ value, disabled });
+  const groupDisabled = useContext(GroupDisabledContext);
+  const isDisabled = disabled || groupDisabled;
+  const itemHelperTextId = useId();
 
   return (
     <>
-      <StyledItem value={value} disabled={disabled}>
-        <StyledItemControl />
-        <StyledItemText>{label}</StyledItemText>
-        <ArkRadioGroup.ItemHiddenInput />
+      <StyledItem
+        value={value}
+        disabled={disabled || undefined}
+        data-disabled={isDisabled || undefined}
+        aria-describedby={helperText ? itemHelperTextId : undefined}
+      >
+        <StyledItemControl data-disabled={isDisabled || undefined} />
+        <StyledItemText data-disabled={isDisabled || undefined}>
+          {label}
+        </StyledItemText>
+        <ArkRadioGroup.ItemHiddenInput
+          aria-disabled={isDisabled || undefined}
+        />
       </StyledItem>
-      {/* itemHelperText は Ark UI パーツ外のため data-disabled を手動付与 */}
       {helperText && (
-        <StyledItemHelperText data-disabled={itemState.disabled || undefined}>
+        <StyledItemHelperText
+          id={itemHelperTextId}
+          data-disabled={isDisabled || undefined}
+        >
           {helperText}
         </StyledItemHelperText>
       )}
