@@ -5,6 +5,13 @@ const hoverVariantOverlay = {
   _active: { _after: { backgroundColor: "hovered.variant" } },
 } as const;
 
+const focusVisibleOverlay = {
+  _focusVisible: {
+    borderColor: "outline.dim",
+    _after: { backgroundColor: "hovered.variant" },
+  },
+} as const;
+
 const outlinedDisabled = {
   backgroundColor: "disabled",
   color: "disabled.onSurface",
@@ -65,12 +72,7 @@ export const buttonRecipe = cva({
         borderStyle: "solid",
         borderColor: "outline",
         ...hoverVariantOverlay,
-        _focusVisible: {
-          borderColor: "outline.dim",
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
+        ...focusVisibleOverlay,
         _disabled: outlinedDisabled,
       },
       ghost: {
@@ -80,12 +82,7 @@ export const buttonRecipe = cva({
         borderStyle: "solid",
         borderColor: "transparent",
         ...hoverVariantOverlay,
-        _focusVisible: {
-          borderColor: "outline.dim",
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
+        ...focusVisibleOverlay,
         _disabled: {
           color: "disabled.onSurface",
         },
@@ -98,12 +95,7 @@ export const buttonRecipe = cva({
         borderColor: "outline",
         borderRadius: "medium",
         ...hoverVariantOverlay,
-        _focusVisible: {
-          borderColor: "outline.dim",
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
+        ...focusVisibleOverlay,
         _disabled: outlinedDisabled,
       },
     },
