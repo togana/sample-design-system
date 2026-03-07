@@ -3,20 +3,16 @@
 import { Checkbox as ArkCheckbox } from "@ark-ui/react/checkbox";
 import type { CheckedChangeDetails, CheckedState } from "@zag-js/checkbox";
 import { Field } from "@ark-ui/react/field";
-import { styled } from "@styled/jsx";
-import {
-  checkboxControlRecipe,
-  checkboxFieldRecipe,
-  checkboxHelperTextRecipe,
-  checkboxLabelRecipe,
-  checkboxRootRecipe,
-} from "./checkbox.recipe";
+import { createStyleContext } from "@styled/jsx/create-style-context";
+import { checkboxRecipe } from "./checkbox.recipe";
 
-const StyledField = styled(Field.Root, checkboxFieldRecipe);
-const StyledRoot = styled(ArkCheckbox.Root, checkboxRootRecipe);
-const StyledControl = styled(ArkCheckbox.Control, checkboxControlRecipe);
-const StyledLabel = styled(ArkCheckbox.Label, checkboxLabelRecipe);
-const StyledHelperText = styled(Field.HelperText, checkboxHelperTextRecipe);
+const { withProvider, withContext } = createStyleContext(checkboxRecipe);
+
+const StyledField = withProvider(Field.Root, "field");
+const StyledRoot = withContext(ArkCheckbox.Root, "root");
+const StyledControl = withContext(ArkCheckbox.Control, "control");
+const StyledLabel = withContext(ArkCheckbox.Label, "label");
+const StyledHelperText = withContext(Field.HelperText, "helperText");
 
 export type CheckboxProps = {
   label: string;
