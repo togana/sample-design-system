@@ -76,10 +76,11 @@ export const buttonRecipe = cva({
       ghost: {
         backgroundColor: "transparent",
         color: "primary",
+        borderWidth: "medium",
+        borderStyle: "solid",
+        borderColor: "transparent",
         ...hoverVariantOverlay,
         _focusVisible: {
-          borderWidth: "medium",
-          borderStyle: "solid",
           borderColor: "outline.dim",
           _after: {
             backgroundColor: "hovered.variant",
