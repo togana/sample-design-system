@@ -50,6 +50,16 @@ export const CheckedFocus = meta.story({
   args: { checked: true },
 });
 
+// --- disabled + focus ---
+
+export const DisabledUncheckedFocus = meta.story({
+  args: { checked: false, disabled: true },
+});
+
+export const DisabledCheckedFocus = meta.story({
+  args: { checked: true, disabled: true },
+});
+
 // --- helperText ---
 
 export const WithHelperText = meta.story({
