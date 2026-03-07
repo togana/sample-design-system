@@ -1,6 +1,8 @@
 import { defineConfig } from "@pandacss/dev";
 import { conditions, theme } from "./src/preset";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export default defineConfig({
   presets: ["@pandacss/preset-base"],
 
@@ -19,4 +21,16 @@ export default defineConfig({
   jsxFramework: "react",
 
   outdir: "styled-system",
+
+  minify: isProduction,
+
+  hash: isProduction,
+
+  shorthands: false,
+
+  strictTokens: true,
+
+  strictPropertyValues: true,
+
+  validation: "error",
 });

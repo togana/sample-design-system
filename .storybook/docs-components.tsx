@@ -3,7 +3,7 @@ import { styled } from "@styled/jsx";
 
 const DocsContainerBase = styled("div", {
   base: {
-    maxWidth: "48rem",
+    maxWidth: "[48rem]",
     paddingBlock: "8",
     display: "flex",
     flexDirection: "column",
@@ -13,6 +13,8 @@ const DocsContainerBase = styled("div", {
 
 export function DocsContainer({
   className,
+  color: _color,
+  translate: _translate,
   ...props
 }: ComponentPropsWithoutRef<"div">) {
   return (
@@ -24,28 +26,28 @@ export function DocsContainer({
 }
 
 export const DocsTitle = styled("h1", {
-  base: { fontSize: "threeExtraLarge", fontWeight: "bold", color: "text.primary" },
+  base: { fontSize: "threeExtraLarge", fontWeight: "bold", color: "surface.on" },
 });
 
 export const DocsHeading = styled("h2", {
-  base: { fontSize: "extraLarge", fontWeight: "bold", color: "text.primary" },
+  base: { fontSize: "extraLarge", fontWeight: "bold", color: "surface.on" },
 });
 
 export const DocsCaption = styled("p", {
-  base: { color: "text.secondary", fontSize: "small" },
+  base: { color: "surface.onVariant", fontSize: "small" },
 });
 
 export const DocsDivider = styled("hr", {
   base: {
-    borderBlockStart: "1px solid",
-    borderColor: "border",
+    borderBlockStart: "[1px solid]",
+    borderColor: "outline",
     marginBlock: "10",
   },
 });
 
 export const DocsLabel = styled("span", {
   base: {
-    color: "text.secondary",
+    color: "surface.onVariant",
     fontSize: "medium",
     fontWeight: "regular",
     flexShrink: "0",
@@ -54,7 +56,7 @@ export const DocsLabel = styled("span", {
 
 export const DocsSizeLabel = styled("span", {
   base: {
-    color: "text.secondary",
+    color: "surface.onVariant",
     fontSize: "medium",
     fontWeight: "regular",
     width: "8",
@@ -76,14 +78,14 @@ export const DocsVariantGroup = styled("div", {
 });
 
 export const DocsText = styled("p", {
-  base: { color: "text.primary", fontSize: "medium", lineHeight: "loose" },
+  base: { color: "surface.on", fontSize: "medium", lineHeight: "relaxed" },
 });
 
 export const DocsList = styled("ul", {
   base: {
-    color: "text.primary",
+    color: "surface.on",
     fontSize: "medium",
-    lineHeight: "loose",
+    lineHeight: "relaxed",
     paddingInlineStart: "6",
     display: "flex",
     flexDirection: "column",
@@ -95,24 +97,24 @@ export const DocsList = styled("ul", {
 export const DocsTable = styled("table", {
   base: {
     fontSize: "medium",
-    width: "100%",
+    width: "full",
     borderCollapse: "collapse",
     "& th, & td": {
       padding: "2",
       textAlign: "left",
       borderBlockEnd: "1px solid",
-      borderColor: "border",
+      borderColor: "outline",
     },
     "& th": {
       fontWeight: "bold",
-      color: "text.primary",
+      color: "surface.on",
     },
     "& td": {
-      color: "text.secondary",
+      color: "surface.onVariant",
     },
   },
 });
 
 export const DocsSubheading = styled("h3", {
-  base: { fontSize: "large", fontWeight: "bold", color: "text.primary" },
+  base: { fontSize: "large", fontWeight: "bold", color: "surface.on" },
 });

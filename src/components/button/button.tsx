@@ -44,10 +44,10 @@ function Spinner() {
     <styled.svg
       animation="spin 0.6s linear infinite"
       aria-hidden="true"
-      width="1em"
-      height="1em"
+      width="[1em]"
+      height="[1em]"
       viewBox="0 0 24 24"
-      fill="none"
+      fill="[none]"
     >
       <circle
         cx="12"

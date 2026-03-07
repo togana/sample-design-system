@@ -49,7 +49,7 @@ export const buttonRecipe = cva({
         },
       },
       outlined: {
-        backgroundColor: "transparent",
+        backgroundColor: "[transparent]",
         color: "surface.on",
         borderWidth: "medium",
         borderStyle: "solid",
@@ -73,11 +73,11 @@ export const buttonRecipe = cva({
         _disabled: {
           backgroundColor: "disabled",
           color: "disabled.onSurface",
-          borderColor: "transparent",
+          borderColor: "[transparent]",
         },
       },
       ghost: {
-        backgroundColor: "transparent",
+        backgroundColor: "[transparent]",
         color: "primary",
         _hover: {
           _after: {
@@ -102,7 +102,7 @@ export const buttonRecipe = cva({
         },
       },
       rectangle: {
-        backgroundColor: "transparent",
+        backgroundColor: "[transparent]",
         color: "surface.on",
         borderWidth: "medium",
         borderStyle: "solid",
@@ -127,21 +127,21 @@ export const buttonRecipe = cva({
         _disabled: {
           backgroundColor: "disabled",
           color: "disabled.onSurface",
-          borderColor: "transparent",
+          borderColor: "[transparent]",
         },
       },
     },
     size: {
       medium: {
         height: "13",
-        paddingX: "extraLarge",
-        paddingY: "small",
+        paddingInline: "extraLarge",
+        paddingBlock: "small",
         textStyle: "label.large",
       },
       small: {
         height: "10",
-        paddingX: "small",
-        paddingY: "twoExtraSmall",
+        paddingInline: "small",
+        paddingBlock: "twoExtraSmall",
         textStyle: "label.medium",
       },
     },

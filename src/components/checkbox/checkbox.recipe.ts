@@ -31,8 +31,8 @@ export const checkboxControlRecipe = cva({
     borderWidth: "thick",
     borderStyle: "solid",
     borderColor: "outline",
-    backgroundColor: "transparent",
-    color: "transparent",
+    backgroundColor: "[transparent]",
+    color: "[transparent]",
     flexShrink: 0,
     position: "relative",
     overflow: "hidden",
@@ -45,12 +45,12 @@ export const checkboxControlRecipe = cva({
       content: '""',
       position: "absolute",
       inset: "0",
-      borderRadius: "inherit",
+      borderRadius: "[inherit]",
       pointerEvents: "none",
     },
     _checked: {
       backgroundColor: "primary",
-      borderWidth: "0",
+      borderWidth: "[0]",
       color: "primary.on",
       _hover: {
         _after: {
@@ -60,7 +60,7 @@ export const checkboxControlRecipe = cva({
     },
     _indeterminate: {
       backgroundColor: "primary",
-      borderWidth: "0",
+      borderWidth: "[0]",
       color: "primary.on",
       _hover: {
         _after: {
@@ -76,13 +76,13 @@ export const checkboxControlRecipe = cva({
     _disabled: {
       backgroundColor: "disabled",
       borderColor: "disabled.onSurface",
-      color: "transparent",
+      color: "[transparent]",
       _checked: {
-        borderWidth: "0",
+        borderWidth: "[0]",
         color: "disabled.onSurface",
       },
       _indeterminate: {
-        borderWidth: "0",
+        borderWidth: "[0]",
         color: "disabled.onSurface",
       },
     },
