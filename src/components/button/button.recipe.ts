@@ -1,5 +1,16 @@
 import { cva } from "@styled/css";
 
+const hoverVariantOverlay = {
+  _hover: { _after: { backgroundColor: "hovered.variant" } },
+  _active: { _after: { backgroundColor: "hovered.variant" } },
+} as const;
+
+const outlinedDisabled = {
+  backgroundColor: "disabled",
+  color: "disabled.onSurface",
+  borderColor: "transparent",
+} as const;
+
 export const buttonRecipe = cva({
   base: {
     display: "inline-flex",
@@ -11,7 +22,6 @@ export const buttonRecipe = cva({
     position: "relative",
     overflow: "hidden",
     border: "none",
-    textStyle: "label.large",
     fontWeight: "bold",
     focusVisibleRing: "outside",
     focusRingColor: "primary",
@@ -54,41 +64,19 @@ export const buttonRecipe = cva({
         borderWidth: "medium",
         borderStyle: "solid",
         borderColor: "outline",
-        _hover: {
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
-        _active: {
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
+        ...hoverVariantOverlay,
         _focusVisible: {
           borderColor: "outline.dim",
           _after: {
             backgroundColor: "hovered.variant",
           },
         },
-        _disabled: {
-          backgroundColor: "disabled",
-          color: "disabled.onSurface",
-          borderColor: "transparent",
-        },
+        _disabled: outlinedDisabled,
       },
       ghost: {
         backgroundColor: "transparent",
         color: "primary",
-        _hover: {
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
-        _active: {
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
+        ...hoverVariantOverlay,
         _focusVisible: {
           borderWidth: "medium",
           borderStyle: "solid",
@@ -108,27 +96,14 @@ export const buttonRecipe = cva({
         borderStyle: "solid",
         borderColor: "outline",
         borderRadius: "medium",
-        _hover: {
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
-        _active: {
-          _after: {
-            backgroundColor: "hovered.variant",
-          },
-        },
+        ...hoverVariantOverlay,
         _focusVisible: {
           borderColor: "outline.dim",
           _after: {
             backgroundColor: "hovered.variant",
           },
         },
-        _disabled: {
-          backgroundColor: "disabled",
-          color: "disabled.onSurface",
-          borderColor: "transparent",
-        },
+        _disabled: outlinedDisabled,
       },
     },
     size: {

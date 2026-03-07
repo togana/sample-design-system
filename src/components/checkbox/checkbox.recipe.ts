@@ -1,5 +1,21 @@
 import { sva } from "@styled/css";
 
+const checkedStyles = {
+  backgroundColor: "primary",
+  borderWidth: "none",
+  color: "primary.on",
+  _hover: {
+    _after: {
+      backgroundColor: "hovered",
+    },
+  },
+} as const;
+
+const disabledCheckedStyles = {
+  borderWidth: "none",
+  color: "disabled.onSurface",
+} as const;
+
 export const checkboxRecipe = sva({
   slots: ["field", "root", "control", "label", "helperText"],
   base: {
@@ -43,26 +59,8 @@ export const checkboxRecipe = sva({
         inset: "0",
         pointerEvents: "none",
       },
-      _checked: {
-        backgroundColor: "primary",
-        borderWidth: "none",
-        color: "primary.on",
-        _hover: {
-          _after: {
-            backgroundColor: "hovered",
-          },
-        },
-      },
-      _indeterminate: {
-        backgroundColor: "primary",
-        borderWidth: "none",
-        color: "primary.on",
-        _hover: {
-          _after: {
-            backgroundColor: "hovered",
-          },
-        },
-      },
+      _checked: checkedStyles,
+      _indeterminate: checkedStyles,
       _hover: {
         _after: {
           backgroundColor: "hovered.variant",
@@ -72,14 +70,8 @@ export const checkboxRecipe = sva({
         backgroundColor: "disabled",
         borderColor: "disabled.onSurface",
         color: "transparent",
-        _checked: {
-          borderWidth: "none",
-          color: "disabled.onSurface",
-        },
-        _indeterminate: {
-          borderWidth: "none",
-          color: "disabled.onSurface",
-        },
+        _checked: disabledCheckedStyles,
+        _indeterminate: disabledCheckedStyles,
       },
       _invalid: {
         borderColor: "negative",
