@@ -45,7 +45,6 @@ export const checkboxControlRecipe = cva({
       content: '""',
       position: "absolute",
       inset: "0",
-      borderRadius: "[inherit]",
       pointerEvents: "none",
     },
     _checked: {
