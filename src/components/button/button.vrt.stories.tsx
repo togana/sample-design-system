@@ -58,6 +58,24 @@ export const RectangleDisabled = meta.story({
   args: { styleType: "rectangle", disabled: true },
 });
 
+// --- focus ---
+
+export const FilledFocus = meta.story({
+  args: { styleType: "filled" },
+});
+
+export const OutlinedFocus = meta.story({
+  args: { styleType: "outlined" },
+});
+
+export const GhostFocus = meta.story({
+  args: { styleType: "ghost" },
+});
+
+export const RectangleFocus = meta.story({
+  args: { styleType: "rectangle" },
+});
+
 // --- loading ---
 
 export const FilledLoading = meta.story({

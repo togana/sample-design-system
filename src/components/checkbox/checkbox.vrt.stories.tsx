@@ -40,6 +40,16 @@ export const IndeterminateDisabled = meta.story({
   args: { checked: "indeterminate", disabled: true },
 });
 
+// --- focus ---
+
+export const UncheckedFocus = meta.story({
+  args: { checked: false },
+});
+
+export const CheckedFocus = meta.story({
+  args: { checked: true },
+});
+
 // --- helperText ---
 
 export const WithHelperText = meta.story({
