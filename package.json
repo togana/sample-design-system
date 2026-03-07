@@ -10,7 +10,7 @@
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest run && npm run build-storybook",
+    "test": "vitest run && npm run test:vrt",
     "test-storybook": "vitest run --project=storybook",
     "test:vrt": "npm run build-storybook && npx playwright test",
     "test:vrt:update": "npm run build-storybook && npx playwright test --update-snapshots"
