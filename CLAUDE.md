@@ -11,6 +11,7 @@
 - `docs/decisions/` - ADR（Architecture Decision Records）を配置する
 - `docs/research/` - 外部ライブラリやデザインシステムの調査ドキュメントを配置する
 - `src/components/` - デザインシステムのコンポーネントを配置する（ドキュメント `{name}.docs.tsx` もここにコロケーションする）
+- `e2e/vrt/` - Playwright によるビジュアルリグレッションテスト
 - `src/preset/` - Panda CSS preset 関連ファイル（conditions, theme）を配置する
   - `src/preset/theme/tokens/` - プリミティブトークン定義
   - `src/preset/theme/semantic-tokens/` - セマンティックトークン定義
@@ -43,6 +44,11 @@
   - バリアント・サイズ・状態のビジュアルショーケースは **書かない**（docs に集約）
   - `argTypes` で全 props の `description` を明示的に設定する
   - デフォルト値がある props には `table: { defaultValue: { summary: "値" } }` も設定する
+- `{name}.vrt.stories.tsx` — **VRT（ビジュアルリグレッションテスト）専用**
+  - `title: "VRT/ComponentName"` で VRT テストのフィルタ対象にする
+  - `tags: ["!dev", "!autodocs"]` でサイドバー・Docs に非表示
+  - play 関数なし。props のバリアント別に静的な描画のみ配置する
+  - インタラクションテスト用の `.stories.tsx` とは meta が異なるため分離する
 - `{name}.docs.tsx` — **ビジュアルショーケース + ガイドライン**
   - 全バリアント・サイズ・状態の描画、Do/Don't、アクセシビリティ情報を配置する
   - `parameters.docs.page` 経由で Docs タブに接続する
@@ -52,6 +58,9 @@
 - Storybook のインタラクションテスト（`play` 関数）は Vitest で実行する
 - `npm run test-storybook` でインタラクションテストを実行
 - `npm run storybook` で開発サーバー起動、`npm run build-storybook` でビルド
+- `npm run npm run test:vrt` でビジュアルリグレッションテストを実行
+- `npm run test:vrt:update` でベースラインを更新
+- VRT のベースライン画像（`e2e/vrt/__screenshots__/`）は git にコミットする
 
 ## コミット
 
