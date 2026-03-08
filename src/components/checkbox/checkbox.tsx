@@ -83,22 +83,14 @@ export function Checkbox(props: CheckboxProps) {
   const showError = isInvalid && !!errorText;
 
   return (
-    // Field.Root の disabled はネイティブ disabled を hidden input に付与しフォーカスを喪失させるため、
-    // readOnly で操作を無効化し data-disabled を手動伝播する（ADR-008 参照）
-    // Field.Root の invalid は data-invalid を子パーツに自動伝播し、
+    // Field.Root の disabled / invalid はコンテキスト経由で子パーツに自動伝播する（ADR-014）
     // Field.ErrorText の id / aria-describedby 連携も自動管理する
     <StyledField
+      disabled={disabled || undefined}
       invalid={isInvalid}
-      data-disabled={disabled || undefined}
     >
-      <StyledRoot
-        readOnly={disabled || undefined}
-        aria-disabled={disabled || undefined}
-        data-disabled={disabled || undefined}
-        value={value}
-        {...rootProps}
-      >
-        <StyledControl data-disabled={disabled || undefined}>
+      <StyledRoot value={value} {...rootProps}>
+        <StyledControl>
           <ArkCheckbox.Indicator>
             <CheckIcon />
           </ArkCheckbox.Indicator>
@@ -106,19 +98,11 @@ export function Checkbox(props: CheckboxProps) {
             <MinusIcon />
           </ArkCheckbox.Indicator>
         </StyledControl>
-        <StyledLabel data-disabled={disabled || undefined}>
-          {label}
-        </StyledLabel>
-        <ArkCheckbox.HiddenInput aria-disabled={disabled || undefined} />
+        <StyledLabel>{label}</StyledLabel>
+        <ArkCheckbox.HiddenInput />
       </StyledRoot>
-      {helperText && (
-        <StyledHelperText data-disabled={disabled || undefined}>
-          {helperText}
-        </StyledHelperText>
-      )}
-      {showError && (
-        <StyledErrorText>{errorText}</StyledErrorText>
-      )}
+      {helperText && <StyledHelperText>{helperText}</StyledHelperText>}
+      {showError && <StyledErrorText>{errorText}</StyledErrorText>}
     </StyledField>
   );
 }

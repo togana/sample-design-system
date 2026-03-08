@@ -69,18 +69,15 @@ export function RadioGroup(props: RadioGroupProps) {
       .join(" ") || undefined;
 
   return (
-    // Field.Root と同様に readOnly で操作を無効化し、aria-disabled + data-disabled を手動伝播する
-    // Ark UI の disabled はネイティブ disabled を hidden input に付与しフォーカスを喪失させるため使わない
+    // Ark UI の disabled はコンテキスト経由で子パーツに data-disabled を自動伝播する（ADR-014）
     <StyledRoot
-      readOnly={disabled || undefined}
-      aria-disabled={disabled || undefined}
-      data-disabled={disabled || undefined}
+      disabled={disabled || undefined}
       invalid={isInvalid}
       orientation={orientation}
       aria-describedby={describedBy}
       {...rootProps}
     >
-      <StyledLabel data-disabled={disabled || undefined}>{label}</StyledLabel>
+      <StyledLabel>{label}</StyledLabel>
       {helperText && (
         <StyledHelperText
           id={helperTextId}
@@ -114,16 +111,11 @@ export function RadioButtonItem(props: RadioButtonItemProps) {
       <StyledItem
         value={value}
         disabled={disabled || undefined}
-        data-disabled={isDisabled || undefined}
         aria-describedby={helperText ? itemHelperTextId : undefined}
       >
-        <StyledItemControl data-disabled={isDisabled || undefined} />
-        <StyledItemText data-disabled={isDisabled || undefined}>
-          {label}
-        </StyledItemText>
-        <ArkRadioGroup.ItemHiddenInput
-          aria-disabled={isDisabled || undefined}
-        />
+        <StyledItemControl />
+        <StyledItemText>{label}</StyledItemText>
+        <ArkRadioGroup.ItemHiddenInput />
       </StyledItem>
       {helperText && (
         <StyledItemHelperText

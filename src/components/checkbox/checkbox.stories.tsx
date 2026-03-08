@@ -32,7 +32,7 @@ const meta = preview.meta({
       description: "チェック状態が変わったときのコールバック",
     },
     disabled: {
-      description: "非活性状態。フォーカスは維持されるが操作はできない",
+      description: "非活性状態",
       table: { defaultValue: { summary: "false" } },
     },
     invalid: {
@@ -87,7 +87,7 @@ export const DisabledClickBlocked = meta.story({
     const checkbox = canvas.getByRole("checkbox", { name: "無効" });
     await userEvent.click(checkbox);
     await expect(args.onCheckedChange).not.toHaveBeenCalled();
-    await expect(checkbox).toHaveAttribute("aria-disabled", "true");
+    await expect(checkbox).toBeDisabled();
   },
 });
 

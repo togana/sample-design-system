@@ -7,17 +7,13 @@
 
 ## disabled の実装方式
 
-- ネイティブの `disabled` 属性ではなく `aria-disabled="true"` を使用する
-- `aria-disabled` はフォーカス可能な状態を維持しつつ、支援技術に非活性であることを伝達する
-- `onClick` ハンドラ内で `aria-disabled` を検査し、`true` の場合は `preventDefault` + early return する
-- `data-disabled` 属性も連動して付与する（conditions の `_disabled` が参照するため）
-- hover / active の conditions は `not([data-disabled])` でガードされている
-- Ark UI 使用時: Field.Root / Ark コンポーネントの `disabled` prop はネイティブ `disabled` を内部で付与しフォーカスを喪失させるため使わない。`readOnly` + 手動 `data-disabled` で代替する
+- ネイティブの `disabled` 属性を使用する（ADR-014）
+- disabled の理由はツールチップではなく、常に可視のヘルプテキストで伝える
+- Ark UI 使用時: Field.Root / Ark コンポーネントの `disabled` prop をそのまま使う。`data-disabled` はコンテキスト経由で各パーツに自動伝播される
 
 ## loading の実装方式
 
-- `isLoading` 時は `aria-disabled="true"` + `aria-busy="true"` を付与する
-- disabled と同様にクリックイベントを無効化する
+- `isLoading` 時はネイティブ `disabled` + `aria-busy="true"` を付与する
 
 ## Ark UI の使い方
 
@@ -25,7 +21,7 @@
 - 複雑な状態管理が必要なコンポーネント（Checkbox 等）は Ark UI を使う
 - Ark UI 使用時は Field コンポーネントを外殻として配置する（公式推奨パターン）
   - `aria-describedby` の自動連携: Field.HelperText が自動で紐付け
-  - **disabled には Field.Root の `disabled` prop を使わない** — hidden input にネイティブ `disabled` が付与されフォーカスを喪失するため。代わりに Ark UI コンポーネントの `readOnly` で操作を無効化し、`data-disabled` を各パーツに手動伝播する（ADR-008 参照）
+  - disabled は Field.Root の `disabled` prop で伝播する（ADR-014）
 
 ## スタイリング方式
 

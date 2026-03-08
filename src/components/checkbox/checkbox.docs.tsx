@@ -235,9 +235,9 @@ export function CheckboxDocsPage() {
             <td>Field が自動で HelperText と hidden input を紐付ける</td>
           </tr>
           <tr>
-            <td>aria-disabled</td>
+            <td>disabled</td>
             <td>disabled 時</td>
-            <td>操作不可であることを支援技術に伝える（フォーカスは維持される）</td>
+            <td>ネイティブの disabled 属性で非活性にする</td>
           </tr>
           <tr>
             <td>aria-invalid</td>

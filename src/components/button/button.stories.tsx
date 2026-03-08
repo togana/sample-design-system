@@ -26,7 +26,7 @@ const meta = preview.meta({
       table: { defaultValue: { summary: '"medium"' } },
     },
     disabled: {
-      description: "非活性状態。フォーカスは維持されるが操作はできない",
+      description: "非活性状態",
       table: { defaultValue: { summary: "false" } },
     },
     isLoading: {
@@ -76,7 +76,7 @@ export const DisabledClickBlocked = meta.story({
     const button = canvas.getByRole("button", { name: "無効" });
     await userEvent.click(button);
     await expect(args.onClick).not.toHaveBeenCalled();
-    await expect(button).toHaveAttribute("aria-disabled", "true");
+    await expect(button).toBeDisabled();
   },
 });
 
@@ -90,7 +90,7 @@ export const LoadingClickBlocked = meta.story({
     const button = canvas.getByRole("button", { name: "読込中" });
     await userEvent.click(button);
     await expect(args.onClick).not.toHaveBeenCalled();
-    await expect(button).toHaveAttribute("aria-disabled", "true");
+    await expect(button).toBeDisabled();
     await expect(button).toHaveAttribute("aria-busy", "true");
   },
 });

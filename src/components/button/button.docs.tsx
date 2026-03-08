@@ -228,19 +228,14 @@ export function ButtonDocsPage() {
         </thead>
         <tbody>
           <tr>
-            <td>aria-disabled=&quot;true&quot;</td>
+            <td>disabled</td>
             <td>disabled または isLoading 時</td>
-            <td>非活性であることを支援技術に伝える。フォーカスは維持される</td>
+            <td>ネイティブの disabled 属性で非活性にする</td>
           </tr>
           <tr>
             <td>aria-busy=&quot;true&quot;</td>
             <td>isLoading 時</td>
             <td>処理中であることを伝える</td>
-          </tr>
-          <tr>
-            <td>data-disabled</td>
-            <td>disabled または isLoading 時</td>
-            <td>CSS の _disabled セレクタ用。hover/active を無効化する</td>
           </tr>
         </tbody>
       </DocsTable>

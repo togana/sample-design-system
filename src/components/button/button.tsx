@@ -28,7 +28,7 @@ export type ButtonProps = IconProps &
    * @default "medium"
    */
   size?: "medium" | "small";
-  /** 非活性状態。フォーカスは維持されるが操作はできない */
+  /** 非活性状態 */
   disabled?: boolean;
   /**
    * ローディング状態。Spinner を表示しクリックをブロックする。
@@ -82,22 +82,13 @@ export function Button(props: ButtonProps) {
 
   const isDisabled = disabled || isLoading;
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (isDisabled) {
-      e.preventDefault();
-      return;
-    }
-    onClick?.(e);
-  };
-
   return (
     <StyledButton
       styleType={styleType}
       size={size}
-      aria-disabled={isDisabled || undefined}
+      disabled={isDisabled || undefined}
       aria-busy={isLoading || undefined}
-      data-disabled={isDisabled || undefined}
-      onClick={handleClick}
+      onClick={onClick}
       {...rest}
     >
       {isLoading ? <Spinner /> : leftIcon}
