@@ -30,15 +30,6 @@ jobs:
       - run: npx playwright install chromium --with-deps
       - run: npm run build-storybook
 
-      - name: Debug - Check CSS output
-        run: |
-          echo "=== CSS files ==="
-          ls -la storybook-static/assets/iframe-*.css 2>/dev/null || echo "No iframe CSS found"
-          echo "=== CSS content (first 50 lines) ==="
-          head -50 storybook-static/assets/iframe-*.css 2>/dev/null || true
-          echo "=== styled-system check ==="
-          ls styled-system/ 2>/dev/null || echo "styled-system not found"
-
       - name: Run VRT
         if: ${{ !inputs.update_snapshots }}
         run: npx playwright test
