@@ -24,7 +24,7 @@ export default defineConfig({
 
   minify: isProduction,
 
-  hash: isProduction,
+  hash: isProduction ? { cssVar: false, className: true } : false,
 
   shorthands: false,
 
