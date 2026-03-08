@@ -1,3 +1,4 @@
+import { disabledA11yParameters } from "../../../.storybook/a11y";
 import preview from "../../../.storybook/preview";
 import { Checkbox } from "./checkbox";
 
@@ -30,14 +31,17 @@ export const Indeterminate = meta.story({
 
 export const UncheckedDisabled = meta.story({
   args: { checked: false, disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const CheckedDisabled = meta.story({
   args: { checked: true, disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const IndeterminateDisabled = meta.story({
   args: { checked: "indeterminate", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 // --- focus ---
@@ -54,10 +58,12 @@ export const CheckedFocus = meta.story({
 
 export const DisabledUncheckedFocus = meta.story({
   args: { checked: false, disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const DisabledCheckedFocus = meta.story({
   args: { checked: true, disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 // --- helperText ---
@@ -94,4 +100,5 @@ export const InvalidWithHelperAndErrorText = meta.story({
 
 export const InvalidDisabled = meta.story({
   args: { invalid: true, errorText: "このエラーは表示されない", disabled: true },
+  parameters: disabledA11yParameters,
 });

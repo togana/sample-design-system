@@ -1,4 +1,5 @@
 import { expect, fn, userEvent, within } from "storybook/test";
+import { disabledA11yParameters } from "../../../.storybook/a11y";
 import preview from "../../../.storybook/preview";
 import { RadioButtonItem, RadioGroup } from "./radio-button";
 import { RadioButtonDocsPage } from "./radio-button.docs";
@@ -105,6 +106,7 @@ export const DisabledClickBlocked = meta.story({
   name: "Disabled Click Blocked",
   tags: ["!dev"],
   args: { disabled: true },
+  parameters: disabledA11yParameters,
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const radio = canvas.getByRole("radio", { name: "メール" });
@@ -151,6 +153,7 @@ export const DisabledInvalidSuppressed = meta.story({
     invalid: true,
     errorText: "いずれかを選択してください",
   },
+  parameters: disabledA11yParameters,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(

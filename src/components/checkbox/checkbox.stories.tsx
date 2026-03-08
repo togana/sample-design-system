@@ -1,4 +1,5 @@
 import { expect, fn, userEvent, within } from "storybook/test";
+import { disabledA11yParameters } from "../../../.storybook/a11y";
 import preview from "../../../.storybook/preview";
 import { Checkbox } from "./checkbox";
 import { CheckboxDocsPage } from "./checkbox.docs";
@@ -80,6 +81,7 @@ export const DisabledClickBlocked = meta.story({
   name: "Disabled Click Blocked",
   tags: ["!dev"],
   args: { label: "無効", disabled: true },
+  parameters: disabledA11yParameters,
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const checkbox = canvas.getByRole("checkbox", { name: "無効" });
@@ -120,6 +122,7 @@ export const DisabledInvalidSuppressed = meta.story({
     invalid: true,
     errorText: "同意が必要です",
   },
+  parameters: disabledA11yParameters,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.queryByText("同意が必要です")).not.toBeInTheDocument();

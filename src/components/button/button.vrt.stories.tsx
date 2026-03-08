@@ -1,3 +1,4 @@
+import { disabledA11yParameters } from "../../../.storybook/a11y";
 import preview from "../../../.storybook/preview";
 import { Button } from "./button";
 
@@ -44,18 +45,22 @@ export const SizeSmall = meta.story({
 
 export const FilledDisabled = meta.story({
   args: { styleType: "filled", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const OutlinedDisabled = meta.story({
   args: { styleType: "outlined", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const GhostDisabled = meta.story({
   args: { styleType: "ghost", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const RectangleDisabled = meta.story({
   args: { styleType: "rectangle", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 // --- focus ---
@@ -80,34 +85,42 @@ export const RectangleFocus = meta.story({
 
 export const FilledDisabledFocus = meta.story({
   args: { styleType: "filled", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const OutlinedDisabledFocus = meta.story({
   args: { styleType: "outlined", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const GhostDisabledFocus = meta.story({
   args: { styleType: "ghost", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const RectangleDisabledFocus = meta.story({
   args: { styleType: "rectangle", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 // --- loading ---
 
 export const FilledLoading = meta.story({
   args: { styleType: "filled", isLoading: true },
+  parameters: disabledA11yParameters,
 });
 
 export const OutlinedLoading = meta.story({
   args: { styleType: "outlined", isLoading: true },
+  parameters: disabledA11yParameters,
 });
 
 export const GhostLoading = meta.story({
   args: { styleType: "ghost", isLoading: true },
+  parameters: disabledA11yParameters,
 });
 
 export const RectangleLoading = meta.story({
   args: { styleType: "rectangle", isLoading: true },
+  parameters: disabledA11yParameters,
 });

@@ -1,4 +1,5 @@
 import { expect, fn, userEvent, within } from "storybook/test";
+import { disabledA11yParameters } from "../../../.storybook/a11y";
 import preview from "../../../.storybook/preview";
 import { Button } from "./button";
 import { ButtonDocsPage } from "./button.docs";
@@ -69,6 +70,7 @@ export const DisabledClickBlocked = meta.story({
   name: "Disabled Click Blocked",
   tags: ["!dev"],
   args: { children: "無効", disabled: true },
+  parameters: disabledA11yParameters,
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole("button", { name: "無効" });
@@ -82,6 +84,7 @@ export const LoadingClickBlocked = meta.story({
   name: "Loading Click Blocked",
   tags: ["!dev"],
   args: { children: "読込中", isLoading: true },
+  parameters: disabledA11yParameters,
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole("button", { name: "読込中" });

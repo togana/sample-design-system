@@ -1,3 +1,4 @@
+import { disabledA11yParameters } from "../../../.storybook/a11y";
 import preview from "../../../.storybook/preview";
 import { RadioButtonItem, RadioGroup } from "./radio-button";
 
@@ -33,10 +34,12 @@ export const Checked = meta.story({
 
 export const DisabledUnchecked = meta.story({
   args: { disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 export const DisabledChecked = meta.story({
   args: { defaultValue: "email", disabled: true },
+  parameters: disabledA11yParameters,
 });
 
 // --- helperText ---
@@ -76,6 +79,7 @@ export const ItemDisabled = meta.story({
       </>
     ),
   },
+  parameters: disabledA11yParameters,
 });
 
 // --- invalid ---
@@ -102,4 +106,5 @@ export const InvalidWithHelperAndErrorText = meta.story({
 
 export const InvalidDisabled = meta.story({
   args: { disabled: true, invalid: true, errorText: "このエラーは表示されない" },
+  parameters: disabledA11yParameters,
 });
