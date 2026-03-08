@@ -50,6 +50,7 @@ test.describe("Visual Regression Tests", () => {
 
         await page.goto(url);
         await page.waitForLoadState("networkidle");
+        await page.evaluate(() => document.fonts.ready);
 
         await page.evaluate((mode) => {
           document.body.setAttribute("data-color-mode", mode);
