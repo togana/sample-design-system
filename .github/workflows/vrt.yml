@@ -1,0 +1,30 @@
+name: VRT
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  vrt:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: jdx/mise-action@5228313ee0372e111a38da051671ca30fc5a96db # v3.6.3
+      - run: npm ci
+      - run: npx playwright install chromium --with-deps
+      - run: npm run build-storybook
+      - run: npx playwright test
+
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        if: failure()
+        with:
+          name: vrt-report
+          path: |
+            playwright-report/
+            e2e/vrt/__screenshots__/
+          retention-days: 30
