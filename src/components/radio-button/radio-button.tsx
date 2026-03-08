@@ -9,6 +9,9 @@ import { createStyleContext } from "@styled/jsx/create-style-context";
 import { styled } from "@styled/jsx";
 import { radioButtonRecipe } from "./radio-button.recipe";
 
+// StyledItemHelperText は Ark UI パーツではなく素の styled("p") のため、
+// RadioGroup.Root の disabled 自動伝播の対象外。グループの disabled 状態を
+// ItemHelperText の data-disabled に手動反映するためのコンテキスト。
 const GroupDisabledContext = createContext(false);
 
 const { withProvider, withContext } = createStyleContext(radioButtonRecipe);

@@ -112,6 +112,7 @@ export const DisabledClickBlocked = meta.story({
     const radio = canvas.getByRole("radio", { name: "メール" });
     await userEvent.click(radio);
     await expect(args.onValueChange).not.toHaveBeenCalled();
+    await expect(radio).toBeDisabled();
   },
 });
 
